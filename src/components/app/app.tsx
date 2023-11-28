@@ -1,9 +1,11 @@
+import styles from "./app.module.css"
+
 
 function App() {
 
   return (
     <>
-     <h1></h1>
+     <h1 className={styles.heading_XL}> dfsdafdafdsfdssd</h1>
     </>
   )
 }
