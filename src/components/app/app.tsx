@@ -1,11 +1,13 @@
-import styles from "./app.module.css"
+import "./app.module.css"
+import Button from "../../ui/Button/button"
 
 
 function App() {
 
   return (
     <>
-     <h1 className={styles.heading_XL}> dfsdafdafdsfdssd</h1>
+     <h1 className ='heading_XL'> dfsdafdafdsfdssd</h1>
+     <Button mode="primary">Knopochka</Button>
     </>
   )
 }
