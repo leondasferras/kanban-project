@@ -1,0 +1,8 @@
+.dropdownItem {
+  list-style: none;
+  color:var(--light-grey)
+}
+
+.dropdownItem:hover{
+  opacity: 50%;
+}

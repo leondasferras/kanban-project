@@ -8,7 +8,11 @@ type buttonProps = {
 
 const StyledButton = styled.button<buttonProps> `
   border-radius: 24px;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
   display: flex;
+  justify-content: center;
   align-items: center;
   justify-items: center;
   color: var(--white);
@@ -48,7 +52,7 @@ const StyledButton = styled.button<buttonProps> `
 
 const Button: React.FC<buttonProps> = ({mode = 'primary', size = 'small', children}) => {
   return (
-    <StyledButton mode={mode} size={size} onClick={()=>console.log('312321321')}>{children}</StyledButton>
+    <StyledButton className="heading_M" mode={mode} size={size} onClick={()=>console.log('312321321')}>{children}</StyledButton>
   )
 }
 

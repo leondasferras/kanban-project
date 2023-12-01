@@ -15,8 +15,14 @@ input[type="checkbox"] + span {
   box-sizing: border-box;
   background-color: var(--white);
   border-radius: 2px;
+  margin-right: 16px;
 }
 
 input[type="checkbox"]:checked + span {
   background: var(--main-purple) url("../../assets/icon-check.svg") no-repeat center ;
+}
+
+input[type="checkbox"]:checked ~ div {
+  text-decoration:line-through;
+  color: var(--medium-grey)
 }
