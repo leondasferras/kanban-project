@@ -4,7 +4,6 @@ import styles from './dropdown.module.css'
 
 
 
-
 const StyledDropdownButton = styled.button `
   padding:16px;
   min-height: 40px;
@@ -15,7 +14,6 @@ const StyledDropdownButton = styled.button `
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: url("https://img51994.domkino.tv/img/2017-04-24/fmt_114_24_533be124080f2404f6ef91209d4b8862.jpg") center no-repeat;
 
 `
 
@@ -53,7 +51,9 @@ const handlePickOption = (e) => {
 
   return (
 <div className="dropdown text_medium" onMouseLeave = {()=> setIsOpen(false)}>
-<StyledDropdownButton onClick = {handleToggleDropdown} > {currentOption} </StyledDropdownButton>
+<StyledDropdownButton onClick = {handleToggleDropdown} > {currentOption} 
+    <div className={styles.icon}></div>
+</StyledDropdownButton>
   {
   isOpen && 
     <StyledDropdownContainer onClick={(e) => handlePickOption(e)}>

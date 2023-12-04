@@ -6,3 +6,10 @@
 .dropdownItem:hover{
   opacity: 50%;
 }
+
+.icon {
+  background: url('../../assets/icon-chevron-down.svg') center no-repeat;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}

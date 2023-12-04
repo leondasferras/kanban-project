@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+
+
+}
+
+.logo {
+  box-sizing: border-box;
+  padding: 0 114px 0 34px;
+  height: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 29px 30px 29px 24px;;
+  border-left: 1px solid var(--lines-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--lines-light);
+}
+
+.buttons {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.menuBtn {
+  height: 20px;
+}

@@ -1,0 +1,11 @@
+.sidebar {
+  width: 301px;
+  box-sizing: border-box;
+  border-right: 1px solid var(--lines-light);
+  padding: 15px 0 0 24px;
+}
+
+.boardsCounter {
+  color: var(--medium-grey);
+  letter-spacing: 2.4px;
+}

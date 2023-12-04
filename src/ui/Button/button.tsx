@@ -52,7 +52,7 @@ const StyledButton = styled.button<buttonProps> `
 
 const Button: React.FC<buttonProps> = ({mode = 'primary', size = 'small', children}) => {
   return (
-    <StyledButton className="heading_M" mode={mode} size={size} onClick={()=>console.log('312321321')}>{children}</StyledButton>
+    <StyledButton className="heading_M" mode={mode} size={size}>{children}</StyledButton>
   )
 }
 
