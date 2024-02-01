@@ -1,6 +1,7 @@
 .dropdownItem {
   list-style: none;
-  color:var(--light-grey)
+  color:var(--medium-grey);
+  padding: 8px 0;
 }
 
 .dropdownItem:hover{

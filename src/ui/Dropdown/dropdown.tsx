@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { EventHandler, useState } from 'react';
 import styled from 'styled-components';
 import styles from './dropdown.module.css'
 
@@ -14,14 +14,17 @@ const StyledDropdownButton = styled.button `
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: inherit;
+  font: inherit;
 
 `
 
 const StyledDropdownContainer = styled.ul `
   border-radius: 8px;
   padding: 16px; 
-  background-color: salmon;
+  background-color: var(--white);
   gap: 8px;
+  color: var(--black);
 `
 
 
@@ -42,7 +45,6 @@ const handleToggleDropdown = () => {
 }
 
 const handlePickOption = (e) => {
-  console.log(e)
   if(e.target.nodeName === "LI"){
   setCurrentOption(e.target.textContent)
   setIsOpen(false)}
@@ -50,7 +52,7 @@ const handlePickOption = (e) => {
 } 
 
   return (
-<div className="dropdown text_medium" onMouseLeave = {()=> setIsOpen(false)}>
+<div className="text_bold dropdown" onMouseLeave = {()=> setIsOpen(false)}>
 <StyledDropdownButton onClick = {handleToggleDropdown} > {currentOption} 
     <div className={styles.icon}></div>
 </StyledDropdownButton>

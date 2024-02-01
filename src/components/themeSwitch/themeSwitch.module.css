@@ -1,0 +1,51 @@
+input[type = checkbox] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+
+.lightThemeIcon {
+  background: url('../../assets/icon-light-theme.svg') center no-repeat;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.darkThemeIcon {
+  background: url('../../assets/icon-dark-theme.svg') center no-repeat;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.switchContainer {
+  display: flex;
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+  background-color: var(--main-purple);
+  border-radius: 30px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3px 3px;
+  transition: all 1s linear;
+  margin: 0 20px;
+}
+
+.switchContainer:hover {
+  background-color: var(--main-purple-hover);
+}
+
+.switchCircle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50px;
+  background-color: var(--white);
+  transition: all 1s linear;
+}
+
+input[type="checkbox"]:checked ~ label  {
+  justify-content: flex-end;
+  transition: all 1s linear;
+}
