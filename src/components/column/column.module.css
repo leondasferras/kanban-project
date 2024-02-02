@@ -1,0 +1,21 @@
+.listTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.titleIcon {
+  height: 15px;
+  width: 15px;
+  background-color: aqua;
+  border-radius: 50%;;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap:20px;
+  padding: 0;
+}

@@ -2,6 +2,7 @@ import "./app.module.css"
 
 import Header from'../header/header'
 import Sidebar from "../sidebar/sidebar"
+import Main  from "../main/main"
 
 
 
@@ -10,9 +11,10 @@ function App() {
   return (
     <>
      <Header/>
-     <main className="main">
-      <Sidebar/>
-     </main>
+     <Main>
+       <Sidebar/>
+     </Main>
+
 
     </>
   )

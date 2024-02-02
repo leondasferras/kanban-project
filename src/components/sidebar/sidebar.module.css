@@ -3,6 +3,7 @@
   box-sizing: border-box;
   border-right: 1px solid var(--lines-light);
   padding: 15px 24px;
+  background-color: var(--white);
 }
 
 .boardsCounter {
@@ -47,16 +48,33 @@ input[type = radio]:checked + label {
   color: var(--white)
 }
 
+input[type = radio]:not(:checked) + label:hover {
+  background-color: var(--light-grey);
+}
+
 .hideSidebarBtn {
 display: flex;
 gap: 15px;
 align-items: center;
-color: var(--medium-grey)
-
+color: var(--medium-grey);
+padding: 14px 0 14px 24px;
+margin-left: -30px;
+border-top-right-radius: 50px;
+border-bottom-right-radius: 50px;
+box-sizing: border-box;
 }
 
 .hideIcon {
   width: 18px;
   height: 18px;
   background: url('../../assets/icon-hide-sidebar.svg') no-repeat;
+}
+
+.hideSidebarBtn:hover {
+  background-color: var(--light-grey);
+  max-width: 240px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  color: var(--main-purple)
 }
