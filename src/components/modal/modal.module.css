@@ -1,0 +1,25 @@
+.modal {
+  width: 480px;
+  z-index: 20;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.modalOverlay {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #000;
+  opacity: 60%;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  }
