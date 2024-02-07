@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.subtasks {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtasks > *:nth-last-child(2) {
+  margin-bottom: 8px;
+}

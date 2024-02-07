@@ -22,15 +22,16 @@ const StyledInput = styled.input `
 type InputProps = {
   label?: string,
   removable?:boolean,
+  placeHolder?: string
 
 }
 
 
-const Input:React.FC<InputProps> = () => {
+const Input:React.FC<InputProps> = ({label, removable, placeHolder}) => {
   return (
     <div className={`${styles.wrapper} text_bold`}>
-    <label className={styles.label}> label </label>
-    <StyledInput className="text_medium" placeholder="type some shit"/>
+    <label className={styles.label}> {label} </label>
+    <StyledInput className="text_medium" placeholder={placeHolder}/>
     </div>
   )
 }

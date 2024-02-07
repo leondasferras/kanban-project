@@ -28,8 +28,6 @@ const StyledDropdownContainer = styled.ul `
 `
 
 
-
-
 type DropdownProps = {
   options: Array<string>,
 
