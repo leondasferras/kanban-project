@@ -1,0 +1,16 @@
+.wrapper {
+
+}
+
+.header {
+  color: var(--red);
+}
+
+.text {
+  color: var(--medium-grey);
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 12px;
+}

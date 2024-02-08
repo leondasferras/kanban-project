@@ -6,7 +6,8 @@ import Main  from "../main/main"
 import Modal from "../modal/modal"
 import OpenTask from "../modal/modals/openTask/openTask"
 import Newtask from "../modal/modals/newTask/newTask"
-
+import NewBoard from "../modal/modals/newBoard/newBoard"
+import DeleteModal from "../modal/modals/deleteModal/deleteModal"
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
      <Main>
        <Sidebar/>
        <Modal>
-        <Newtask/>
+        <DeleteModal/>
        </Modal>
      </Main>
 

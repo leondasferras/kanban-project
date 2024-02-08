@@ -12,3 +12,7 @@
 .subtasks > *:nth-last-child(2) {
   margin-bottom: 8px;
 }
+
+.status {
+  margin: 0;
+}

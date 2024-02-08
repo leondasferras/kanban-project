@@ -19,7 +19,8 @@ const Newtask = () => {
         <Input removable = {true} placeHolder="e.g. Take coffee break" />
         <Button mode='secondary'>+Add New Subtask</Button>
       </div> 
-        <Dropdown options={['todo', 'todo', 'todo','todo']}/>
+        <Dropdown label="Status" options={['todo', 'todo', 'todo','todo']}/>
+        <Button>Create Task</Button>
     </div>
   );
 };

@@ -30,10 +30,11 @@ const StyledDropdownContainer = styled.ul `
 
 type DropdownProps = {
   options: Array<string>,
+  label?: string,
 
 }
 
-const Dropdown:React.FunctionComponent<DropdownProps> = ({options}) => {
+const Dropdown:React.FunctionComponent<DropdownProps> = ({options, label}) => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentOption, setCurrentOption] = useState(options[0])
@@ -50,17 +51,20 @@ const handlePickOption = (e) => {
 } 
 
   return (
-<div className="text_bold dropdown" onMouseLeave = {()=> setIsOpen(false)}>
-<StyledDropdownButton onClick = {handleToggleDropdown} > {currentOption} 
-    <div className={styles.icon}></div>
-</StyledDropdownButton>
-  {
-  isOpen && 
-    <StyledDropdownContainer onClick={(e) => handlePickOption(e)}>
-      {options.map((option, i) => <li className={styles.dropdownItem} key = {i}> {option} </li>)}
-    </StyledDropdownContainer>
-  }
-
+<div className={styles.wrapper}>
+  { label && <label className={`${styles.label} text_bold`}> {label} </label>}
+  <div className="text_bold dropdown" onMouseLeave = {()=> setIsOpen(false)}>
+  <StyledDropdownButton onClick = {handleToggleDropdown} > {currentOption}
+  <div className={styles.icon}></div>
+  </StyledDropdownButton>
+    {
+    isOpen &&
+  <StyledDropdownContainer onClick={(e) => handlePickOption(e)}>
+    {options.map((option, i) => <li className={styles.dropdownItem} key = {i}> {option} </li>)}
+  </StyledDropdownContainer>
+    }
+  
+  </div>
 </div>
   )
 }
