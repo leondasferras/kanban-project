@@ -2,29 +2,29 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 
-interface subtaskState {
+interface ISubtask {
   name: string,
   isDone: boolean,
 }
 
-interface taskState {
+interface ITask {
   taskName: string,
   description: string,
-  subtasks: Array<subtaskState>
+  subtasks: Array<ISubtask>
 }
 
-interface columnState {
+interface IColumn {
   columnName: string,
-  tasks: Array<taskState>
+  tasks: Array<ITask>
 }
 
-interface boardName {
+export interface IBoard {
   boardName: string,
-  columns: Array<columnState>
+  columns: Array<IColumn>
 }
 
 interface useTasksState {
-  boards: Array<boardName>,
+  boards: Array<IBoard>,
 
 }
 
@@ -47,7 +47,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task2',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -56,7 +56,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task3',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -79,7 +79,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task2',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -88,7 +88,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task3',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -102,10 +102,10 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
     {
       boardName: 'board2',
       columns: [{
-        columnName: 'Column1',
+        columnName: 'Column22',
         tasks: [
           {
-            taskName: 'Task1',
+            taskName: 'Task22',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -114,7 +114,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task2',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -123,7 +123,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task3',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -146,7 +146,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task2',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -155,7 +155,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
             ],
           },
           {
-            taskName: 'Task1',
+            taskName: 'Task3',
             description: 'Task1 description',
             subtasks: [
               {name: 'Subtask1', isDone: false},
@@ -167,7 +167,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
       }]
     }
   ],
-  setCurrentBoard: ({currentBoard}) => set((state) => {
+  setCurrentBoard: (currentBoard) => set((state) => {
     return {...state, currentBoard: currentBoard}
   })
 })))

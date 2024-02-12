@@ -4,16 +4,20 @@ import ColumnItem from '../columnItem/columnItem';
 
 
 
-const Column = () => {
+const Column = ({column}) => {
+
+  
   return (
     <ul className={styles.taskList}>
       <span  className={`${styles.listTitle} heading_M`}> 
         <div className={styles.titleIcon}/>
-        TODO{ '(123)'}
+        {`${column.columnName} (${column.tasks.length})`}
       </span>
-      <ColumnItem/>
-      <ColumnItem/>
-      <ColumnItem/>
+      {column.tasks.map((task) => {
+              return <ColumnItem task={task}/>
+      })}
+
+
     </ul>
   )
 }

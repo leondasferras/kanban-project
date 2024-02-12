@@ -1,12 +1,20 @@
+import { ChangeEvent, FC } from "react";
 import styles from "./sidebar.module.css";
 import { ThemeSwitch } from "../themeSwitch/themeSwitch";
-import { FC } from "react";
+import useTasks from "../../services/store";
+import { IBoard } from "../../services/store";
 
-type TSidebar = {
-  boards: Array<string>
-}
 
-const Sidebar:FC<TSidebar>= ({ boards }) => {
+
+
+const Sidebar:FC= () => {
+  const {currentBoard, boards, setCurrentBoard} = useTasks();
+  const boardsNames = boards.map((board:IBoard) => board.boardName)
+
+  const onBoardChange = (e:any) => {
+    setCurrentBoard(e.currentTarget.value)
+  }
+
   return (
     <div className={styles.sidebar}>
       <div className={`${styles.boardsCounter} text_medium`}>
@@ -14,18 +22,18 @@ const Sidebar:FC<TSidebar>= ({ boards }) => {
       </div>
 
       <ul className={styles.boardList}>
-        { boards.map((name) => {
+        { boardsNames.map((name:string) => {
 
           return <li>
-            <input type="radio" id={name} name="board" />
-            <label className={`${styles.label} heading_M`} htmlFor="board">
+            <input onChange={onBoardChange} id ={name} type="radio" value={name} name="board" checked={currentBoard === name} />
+            <label className={`${styles.label} heading_M`} htmlFor={name}>
               <div className={styles.icon}></div>
               {name}
             </label>
           </li>;
         })}
-      </ul>
 
+      </ul>
       <ThemeSwitch />
       <div className={`${styles.hideSidebarBtn} heading_M`}>
         <div className={styles.hideIcon}></div>

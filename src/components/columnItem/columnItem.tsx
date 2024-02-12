@@ -1,10 +1,13 @@
+import { useState } from "react"
 import styles from "./columnItem.module.css"
 
-const ColumnItem = () => {
+const ColumnItem = ({task}) => {
+
+
   return (
     <li className={styles.columnItem}>
-      <div className={`${styles.taskName} heading_M`}> Build UI for onboarding flow</div>
-      <div className={`${styles.subtaskCounter} text_bold`}> 0 of 6 substasks</div>
+      <div className={`${styles.taskName} heading_M`}> {task.taskName}</div>
+      <div className={`${styles.subtaskCounter} text_bold`}>{` 0 of ${task.subtasks.length} substasks`}</div>
     </li>
   )
 }

@@ -16,14 +16,14 @@ const boardsNames = boards.map((board) => board.boardName)
 
  
 useEffect(() => {
-  setCurrentBoard({currentBoard:boards[0].boardName})
+  setCurrentBoard(boards[0].boardName)
 }, [])
 
   return (
     <>
      <Header/>
      <Main>
-       <Sidebar boards={boardsNames}/>
+       <Sidebar/>
        <ColumnsSection/>
      </Main>
 
