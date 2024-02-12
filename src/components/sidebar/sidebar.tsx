@@ -1,36 +1,38 @@
+import styles from "./sidebar.module.css";
+import { ThemeSwitch } from "../themeSwitch/themeSwitch";
+import { FC } from "react";
 
-import styles from './sidebar.module.css'
-import { ThemeSwitch } from '../themeSwitch/themeSwitch';
+type TSidebar = {
+  boards: Array<string>
+}
 
-
- const Sidebar = () => {
+const Sidebar:FC<TSidebar>= ({ boards }) => {
   return (
     <div className={styles.sidebar}>
-      <div className={`${styles.boardsCounter} text_medium`}>ALL BOARDS (3)</div>
+      <div className={`${styles.boardsCounter} text_medium`}>
+        ALL BOARDS (3)
+      </div>
+
       <ul className={styles.boardList}>
-        <li>
-        <input type="radio" id='board' name='board'/>
-        <label className={`${styles.label} heading_M`} htmlFor="board">
-            <div className={styles.icon}></div>
-            Platform Launch
-        </label>
-        </li>
-        <li>
-        <input type="radio" id='board2' name='board' />
-          <label className={`${styles.label} heading_M`} htmlFor="board2">
-            <div className={styles.icon}></div>
-            Platform Launch
-          </label>
-        </li>
+        { boards.map((name) => {
+
+          return <li>
+            <input type="radio" id={name} name="board" />
+            <label className={`${styles.label} heading_M`} htmlFor="board">
+              <div className={styles.icon}></div>
+              {name}
+            </label>
+          </li>;
+        })}
       </ul>
-      <ThemeSwitch/>
+
+      <ThemeSwitch />
       <div className={`${styles.hideSidebarBtn} heading_M`}>
         <div className={styles.hideIcon}></div>
         Hide Sidebar
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 export default Sidebar;

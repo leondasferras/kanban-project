@@ -1,0 +1,24 @@
+.columnsSection {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: flex-start;
+  padding-left: 24px;
+}
+
+.addColumnBtn {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: var(--lines-light);
+  border-radius: 8px;
+  color: var(--medium-grey);
+  width: 280px;
+  cursor: pointer;
+}
+
+.addColumnBtn:hover {
+  color: var(--main-purple)
+}

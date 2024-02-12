@@ -3,23 +3,28 @@ import "./app.module.css"
 import Header from'../header/header'
 import Sidebar from "../sidebar/sidebar"
 import Main  from "../main/main"
-import Modal from "../modal/modal"
-import OpenTask from "../modal/modals/openTask/openTask"
-import Newtask from "../modal/modals/newTask/newTask"
-import NewBoard from "../modal/modals/newBoard/newBoard"
-import DeleteModal from "../modal/modals/deleteModal/deleteModal"
+import ColumnsSection from "../mainSection/columnsSection"
+import useTasks from "../../services/store"
+import { useEffect, useState } from "react"
 
 
 function App() {
+
+const {boards, setCurrentBoard} = useTasks()
+const [currentBoard, setCurrentTasks] = useState(boards[0])
+const boardsNames = boards.map((board) => board.boardName)
+
+ 
+useEffect(() => {
+  setCurrentBoard({currentBoard:boards[0].boardName})
+}, [])
 
   return (
     <>
      <Header/>
      <Main>
-       <Sidebar/>
-       <Modal>
-        <DeleteModal/>
-       </Modal>
+       <Sidebar boards={boardsNames}/>
+       <ColumnsSection/>
      </Main>
 
 
