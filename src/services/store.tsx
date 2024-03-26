@@ -31,6 +31,34 @@ interface useTasksState {
 
 const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) => ({
   currentBoard: '',
+  setCurrentBoard: (currentBoard) => set((state) => {
+    return {...state, currentBoard: currentBoard}
+  }),
+  currentColumn:'',
+  setCurrentColumn: (currentColumn) => set((state) => {
+    return {...state, currentColumn: currentColumn}
+  }),
+  currentTask: '',
+  setCurrentTask: (currentTask) => set((state) => {
+    return {...state, currentTask: currentTask}
+  }),
+  isNewTask: false,
+  isEditTask: false,
+
+  editTask: (payload) => set((state) => {
+    let currentTask = state.boards.find(board => board.boardName === state.currentBoard).columns.find(column => column.columnName === state.currentColumn).tasks.find(task => task.name === state.currentTask.name)
+    currentTask = {...payload}
+    return currentTask
+  }),
+
+  replaceTask: (newColumnName) => set((state) => {
+    const currentColumn = state.boards.find(board => board.boardName === state.currentBoard).columns.find(column => column.columnName === state.currentColumn);
+    currentColumn.tasks.filter(task => task.taskName !== state.currentTask.taskName);
+    const newColumn = state.boards.find(board => board.boardName === state.currentBoard).columns.find(column => column.columnName == newColumnName);
+    newColumn.tasks.push(state.currentTask);
+    return state
+  }),
+
   boards: [
     {
       boardName: 'board1',
@@ -167,9 +195,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(devtools((set, get) 
       }]
     }
   ],
-  setCurrentBoard: (currentBoard) => set((state) => {
-    return {...state, currentBoard: currentBoard}
-  })
+
 })))
 
 

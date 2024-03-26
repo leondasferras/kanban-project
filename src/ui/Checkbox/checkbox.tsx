@@ -19,12 +19,12 @@ flex-direction: row;
 }
 
 `
-const Checkbox = () => {
+const Checkbox = ({title, onChange}) => {
   return (
     <StyledWrapper className="text-bold"> 
-        <input type="checkbox" />
+        <input onChange={onChange} type="checkbox" name={title} />
         <span className={styles.realCheck}></span>
-        <div className="text_bold">myCheckbox</div>
+        <div className="text_bold">{title}</div>
 
     </StyledWrapper>
   )

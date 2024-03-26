@@ -31,10 +31,11 @@ const StyledDropdownContainer = styled.ul `
 type DropdownProps = {
   options: Array<string>,
   label?: string,
+  onOptionChange: (string) => void,
 
 }
 
-const Dropdown:React.FunctionComponent<DropdownProps> = ({options, label}) => {
+const Dropdown:React.FunctionComponent<DropdownProps> = ({options, label, onOptionChange}) => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentOption, setCurrentOption] = useState(options[0])
@@ -44,10 +45,16 @@ const handleToggleDropdown = () => {
 }
 
 const handlePickOption = (e) => {
-  if(e.target.nodeName === "LI"){
+  if(e.target.nodeName !== "LI"){
+    return
+}
+  else 
+  console.log(e.target.textContent);
   setCurrentOption(e.target.textContent)
-  setIsOpen(false)}
-  else return
+  setIsOpen(false)
+  onOptionChange(e.target.textContent)
+
+  
 } 
 
   return (
@@ -60,7 +67,7 @@ const handlePickOption = (e) => {
     {
     isOpen &&
   <StyledDropdownContainer onClick={(e) => handlePickOption(e)}>
-    {options.map((option, i) => <li className={styles.dropdownItem} key = {i}> {option} </li>)}
+    {options.map((option, i) => <li className={styles.dropdownItem} key = {i}>{option}</li>)}
   </StyledDropdownContainer>
     }
   

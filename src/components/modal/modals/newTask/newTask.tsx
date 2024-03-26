@@ -14,13 +14,13 @@ const Newtask = () => {
       />
       <div className={`${styles.subtasks} text_bold`}>
         Subtasks
-        <Input removable = {true} placeHolder="e.g. Take coffee break" />
-        <Input removable = {true} placeHolder="e.g. Take coffee break" />
-        <Input removable = {true} placeHolder="e.g. Take coffee break" />
-        <Button mode='secondary'>+Add New Subtask</Button>
-      </div> 
-        <Dropdown label="Status" options={['todo', 'todo', 'todo','todo']}/>
-        <Button>Create Task</Button>
+        <Input removable={true} placeHolder="e.g. Take coffee break" />
+        <Input removable={true} placeHolder="e.g. Take coffee break" />
+        <Input removable={true} placeHolder="e.g. Take coffee break" />
+        <Button mode="secondary">+Add New Subtask</Button>
+      </div>
+      <Dropdown label="Status" options={["todo", "todo", "todo", "todo"]} />
+      <Button>Create Task</Button>
     </div>
   );
 };
