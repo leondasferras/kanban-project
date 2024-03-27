@@ -44,6 +44,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
       set((state) => {
         return { ...state, currentTask: currentTask };
       }),
+
     isNewTask: false,
     setIsNewTask: (payload) => {
       set((state) => {
@@ -59,8 +60,33 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
         return columnToAdd
       })
     },
+
+    isTaskOpened: false,
+    setisTaskOpened: (payload) => {
+      set((state) => {
+        state.isTaskOpened = payload
+        return {...state, isTaskOpened:payload}
+      })
+    },
+
     
     isEditTask: false,
+
+    isDeleteTask: false,
+    setIsDeleteTask:(payload) => {
+      set((state) => {
+        return {...state, isDeleteTask:payload}
+      })
+    },
+    deleteTask:() => {
+      set((state) => {
+        let taskList = state.boards.find(board => board.boardName === state.currentBoard).columns.find(column => column.columnName === state.currentColumn).tasks
+        let taskToDelete = taskList.findIndex(task => task.taskID === state.currentTask.taskID)
+        taskList.splice(taskToDelete,1)
+        return {state}
+      })
+    },
+
 
     editTask: (payload) =>
       set((state) => {
@@ -94,6 +120,20 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
         return state;
       }),
 
+      isNewBoardModal: false,
+      setIsNewBoardModal: (payload) => { 
+        set((state) => {
+          return {...state, isEditBoardModal:payload}
+        })
+      },
+      setNewBoard: (payload) => {
+        set((state) => {
+          state.boards.push(payload)
+          return state
+        })
+      },
+      
+
     boards: [
       {
         boardName: "board1",
@@ -106,9 +146,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task1",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
               {
@@ -116,9 +156,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task2",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
               {
@@ -126,9 +166,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task3",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
             ],
@@ -141,9 +181,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task12",
                 description: "Task12 description",
                 subtasks: [
-                  { name: "Subtask12", isDone: false },
-                  { name: "Subtask22", isDone: false },
-                  { name: "Subtask32", isDone: false },
+                  { id: nanoid(), name: "Subtask12", isDone: false },
+                  { id: nanoid(), name: "Subtask22", isDone: false },
+                  { id: nanoid(), name: "Subtask32", isDone: false },
                 ],
               },
               {
@@ -151,9 +191,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task22",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask12", isDone: false },
-                  { name: "Subtask22", isDone: false },
-                  { name: "Subtask32", isDone: false },
+                  { id: nanoid(), name: "Subtask12", isDone: false },
+                  { id: nanoid(), name: "Subtask22", isDone: false },
+                  { id: nanoid(), name: "Subtask32", isDone: false },
                 ],
               },
               {
@@ -161,9 +201,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task32",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask12", isDone: false },
-                  { name: "Subtask22", isDone: false },
-                  { name: "Subtask32", isDone: false },
+                  { id: nanoid(), name: "Subtask12", isDone: false },
+                  { id: nanoid(), name: "Subtask22", isDone: false },
+                  { id: nanoid(), name: "Subtask32", isDone: false },
                 ],
               },
             ],
@@ -181,9 +221,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task22",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
               {
@@ -191,9 +231,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task22",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
               {
@@ -201,9 +241,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task32",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
             ],
@@ -216,9 +256,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task13",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
               {
@@ -226,9 +266,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task23",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
               {
@@ -236,9 +276,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
                 taskName: "Task33",
                 description: "Task1 description",
                 subtasks: [
-                  { name: "Subtask1", isDone: false },
-                  { name: "Subtask2", isDone: false },
-                  { name: "Subtask3", isDone: false },
+                  { id: nanoid(), name: "Subtask1", isDone: false },
+                  { id: nanoid(), name: "Subtask2", isDone: false },
+                  { id: nanoid(), name: "Subtask3", isDone: false },
                 ],
               },
             ],

@@ -12,9 +12,9 @@ const Column = ({column}) => {
     <ul className={styles.taskList} onClick={() => setCurrentColumn(column.columnName)}>
       <span  className={`${styles.listTitle} heading_M`}> 
         <div className={styles.titleIcon}/>
-        {`${column.columnName} (${column.tasks.length})`}
+        {`${column.columnName} (${ '0' || column.tasks?.length})`}
       </span>
-      {column.tasks.map((task) => {
+      {column.tasks?.map((task) => {
               return <ColumnItem key={task.taskID} task={task}/>
       })}
 

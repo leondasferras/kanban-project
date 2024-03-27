@@ -13,9 +13,9 @@ const Newtask = () => {
     .columns.map((column) => column.columnName);
 
   const [subtasks, setSubtasks] = useState([
-    { id: nanoid(), name: "sub1", isDone: false },
-    { id: nanoid(), name: "sub2", isDone: false },
-    { id: nanoid(), name: "sub3", isDone: false },
+    { id: nanoid(), isDone: false },
+    { id: nanoid(), isDone: false },
+    { id: nanoid(), isDone: false },
   ]);
 
   const [newTaskInfo, setNewTaskInfo] = useState({taskName:'', description:''});
@@ -30,6 +30,16 @@ const Newtask = () => {
 
   const onSubtaskDelete = (e) => {
     const newSubtasks = [...subtasks]
+    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === e.target.dataset.id)
+    console.log(e.target)
+    newSubtasks.splice(subtaskToDelete, 1)
+    setSubtasks(newSubtasks)
+  }
+
+  const onSubtaskAdd = () => {
+    const newSubtasks = [...subtasks]
+    newSubtasks.push({id:nanoid(), isDone: false})
+    setSubtasks(newSubtasks)
   }
 
   const onTitleChange = (e) => {
@@ -72,9 +82,10 @@ const Newtask = () => {
             placeHolder="e.g. Take coffee break"
             key={subtask.id}
             onChange={onSubtaskChange}
+            onDelete={onSubtaskDelete}
           />
         ))}
-        <Button mode="secondary" >+Add New Subtask</Button>
+        <Button mode="secondary"  onClick={onSubtaskAdd}>+Add New Subtask</Button>
       </div>
       <Dropdown label="Status" options={[...columnList]} onOptionChange={onColumnChange}/>
       <Button onClick={onCreateButtonClick}>Create Task</Button>

@@ -31,14 +31,15 @@ const StyledDropdownContainer = styled.ul `
 type DropdownProps = {
   options: Array<string>,
   label?: string,
+  defaultOption?:string;
   onOptionChange?: (string) => void,
 
 }
 
-const Dropdown:React.FunctionComponent<DropdownProps> = ({options, label, onOptionChange}) => {
+const Dropdown:React.FunctionComponent<DropdownProps> = ({options, label, defaultOption, onOptionChange}) => {
 
   const [isOpen, setIsOpen] = useState(false)
-  const [currentOption, setCurrentOption] = useState(options[0])
+  const [currentOption, setCurrentOption] = useState(defaultOption)
 
 const handleToggleDropdown = () => {
   setIsOpen((prev) => !prev)

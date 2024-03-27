@@ -19,7 +19,10 @@
 .icon {
   height: 16px;
   width: 16px;
-  background-image: url('../../assets/icon-board.svg');
+}
+
+.icon  svg {
+  fill:var(--medium-grey);
 }
 
 input[type = radio] {
@@ -46,6 +49,10 @@ input[type = radio] {
 input[type = radio]:checked + label {
   background-color: var(--main-purple);
   color: var(--white)
+}
+
+input[type = radio]:checked + label svg {
+  fill: var(--white);
 }
 
 input[type = radio]:not(:checked) + label:hover {
@@ -78,3 +85,22 @@ box-sizing: border-box;
   align-items: center;
   color: var(--main-purple)
 }
+
+.createBoardBtn {
+  max-width: 240px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  color: var(--main-purple);
+  gap: 12px;
+  padding: 14px 0 14px 24px;
+  margin-left: -30px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-sizing: border-box;
+}
+
+.createBtnIcon svg {
+  fill: var(--main-purple)
+}
+

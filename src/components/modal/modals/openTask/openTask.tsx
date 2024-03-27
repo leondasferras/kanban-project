@@ -5,7 +5,7 @@ import KebabBtn from "../../../../ui/KebabBtn/KebabBtn";
 import useTasks from "../../../../services/store";
 
 const OpenTask = () => {
-  const { currentTask, boards, editTask, currentBoard, replaceTask } = useTasks();
+  const { currentTask, boards, editTask, currentBoard, replaceTask, currentColumn, setIsDeleteTask, setisTaskOpened } = useTasks();
   const columns = boards.find(board => board.boardName === currentBoard).columns.map(column => column.columnName)
   const allSubtasksCounter = currentTask.subtasks.length;
   const doneSubtasksCounter = currentTask.subtasks.filter(
@@ -13,7 +13,7 @@ const OpenTask = () => {
   ).length;
   
   const onCheckboxChange = (e) => {
-    const newSubtask = currentTask.subtasks.find(subtask => subtask.name === e.target.name)
+    const newSubtask = currentTask.subtasks.find(subtask => subtask.id === e.target.id)
     newSubtask.isDone = !newSubtask.isDone
     const newTask = {...currentTask, subtasks: [...currentTask.subtasks, newSubtask]}
     editTask({...currentTask, subtasks: [...currentTask.subtasks, ], newTask  })
@@ -21,25 +21,29 @@ const OpenTask = () => {
 
   const onColumnChange = (newColumnName) => {
     replaceTask(newColumnName)
+  }
 
+  const onDeleteTask = () => {
+    setIsDeleteTask(true)
+    setisTaskOpened(false)
   }
 
   return (
     <>
       <div className={styles.wrapper}>
         <p className="heading_L">{currentTask.taskName}</p>
-        <KebabBtn />
+        <KebabBtn onDelete = {onDeleteTask}/>
       </div>
       <p className={`${styles.text} text_medium`}>{currentTask.description}</p>
       <ul className={`${styles.subtasks} text_bold`}>
         Subtasks({doneSubtasksCounter} of {allSubtasksCounter})
         {currentTask.subtasks.map((subtask, i) => (
           <li key={i}>
-            <Checkbox title={subtask.name} onChange={onCheckboxChange} />
+            <Checkbox title={subtask.name} onChange={onCheckboxChange} checked={subtask.isDone} id={subtask.id}/>
           </li>
         ))}
       </ul>
-      <Dropdown options={[...columns]} onOptionChange = {onColumnChange} />
+      <Dropdown options={[...columns]} onOptionChange = {onColumnChange} defaultOption= {currentColumn} />
     </>
   );
 };
