@@ -13,10 +13,14 @@ import OpenTask from "../modal/modals/openTask/openTask"
 
 function App() {
 
-const {boards, setCurrentBoard, currentTask} = useTasks()
+const {boards, setCurrentBoard, currentTask, setCurrentTask, isNewTask, setIsNewTask} = useTasks()
 const [currentBoard, setCurrentTasks ] = useState(boards[0])
 const boardsNames = boards.map((board) => board.boardName)
 
+
+const closeOpenTaskModal = () => {
+  setCurrentTask('')
+}
  
 useEffect(() => {
   setCurrentBoard(boards[0].boardName)
@@ -30,9 +34,13 @@ useEffect(() => {
        <ColumnsSection/>
      </Main>
 
-    {currentTask && <Modal> 
+    {currentTask && <Modal onClose={closeOpenTaskModal}> 
       <OpenTask/>
     </Modal> }
+
+    {
+      isNewTask && <Modal onClose = {() => setIsNewTask(false)}> <Newtask/> </Modal>
+    }
     </>
   )
 }

@@ -21,18 +21,22 @@ const StyledInput = styled.input `
 
 type InputProps = {
   label?: string,
-  removable?:boolean,
-  placeHolder?: string
+  removable?: boolean,
+  placeHolder?: string,
+  value?: string;
+  onChange?: (e) => void;
+  name?: string;
 
 }
 
 
-const Input:React.FC<InputProps> = ({label, removable, placeHolder}) => {
+const Input:React.FC<InputProps> = ({label, removable, placeHolder, onChange, name}) => {
+
   return (
     <div className={`${styles.wrapper} text_bold`}>
     <label className={styles.label}> {label} </label>
     <div className={styles.inputWrapper}>
-      <StyledInput className="text_medium" placeholder={placeHolder}/>
+      <StyledInput className="text_medium" placeholder={placeHolder} onChange={onChange} name={name}/>
       { removable && <div className={styles.deleteBtn}></div>}
     </div>
     </div>

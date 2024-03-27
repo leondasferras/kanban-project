@@ -33,8 +33,8 @@ const OpenTask = () => {
       <p className={`${styles.text} text_medium`}>{currentTask.description}</p>
       <ul className={`${styles.subtasks} text_bold`}>
         Subtasks({doneSubtasksCounter} of {allSubtasksCounter})
-        {currentTask.subtasks.map((subtask) => (
-          <li>
+        {currentTask.subtasks.map((subtask, i) => (
+          <li key={i}>
             <Checkbox title={subtask.name} onChange={onCheckboxChange} />
           </li>
         ))}

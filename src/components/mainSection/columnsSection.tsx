@@ -11,7 +11,7 @@ const columns = useTasks((state) => state.boards.find((board) => board.boardName
 
   return (
     <section className={styles.columnsSection}>
-      {columns?.map((column) => <Column column={column}/>)}
+      {columns?.map((column, i) => <Column column={column} key={i}/>)}
 
       <div className={`${styles.addColumnBtn} heading_XL`}>  + New column </div>
     </section>

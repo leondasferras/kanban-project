@@ -6,7 +6,6 @@ const ColumnItem = ({task}) => {
 
   const {setCurrentTask} = useTasks()
 
-  const allSubtasksCounter = task.subtasks.length;
   const doneSubtasksCounter = task.subtasks.filter(subtask => subtask.isDone == true ).length;
 
   return (

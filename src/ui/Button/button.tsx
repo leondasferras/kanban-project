@@ -4,6 +4,7 @@ type buttonProps = {
   mode?: 'primary' | 'secondary' | 'destructive';
   size?: 'large' | 'small' ;
   children: string;
+  onClick?: ()=> void;
 }
 
 const StyledButton = styled.button<buttonProps> `
@@ -50,9 +51,9 @@ const StyledButton = styled.button<buttonProps> `
       
 
 
-const Button: React.FC<buttonProps> = ({mode = 'primary', size = 'small', children}) => {
+const Button: React.FC<buttonProps> = ({mode = 'primary', size = 'small', children, onClick}) => {
   return (
-    <StyledButton className="heading_M" mode={mode} size={size}>{children}</StyledButton>
+    <StyledButton className="heading_M"  onClick={onClick} mode={mode} size={size}>{children}</StyledButton>
   )
 }
 

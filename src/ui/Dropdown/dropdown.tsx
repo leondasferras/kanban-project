@@ -31,7 +31,7 @@ const StyledDropdownContainer = styled.ul `
 type DropdownProps = {
   options: Array<string>,
   label?: string,
-  onOptionChange: (string) => void,
+  onOptionChange?: (string) => void,
 
 }
 
@@ -49,7 +49,6 @@ const handlePickOption = (e) => {
     return
 }
   else 
-  console.log(e.target.textContent);
   setCurrentOption(e.target.textContent)
   setIsOpen(false)
   onOptionChange(e.target.textContent)

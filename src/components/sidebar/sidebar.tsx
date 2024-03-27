@@ -22,9 +22,9 @@ const Sidebar:FC= () => {
       </div>
 
       <ul className={styles.boardList}>
-        { boardsNames.map((name:string) => {
+        { boardsNames.map((name:string, i:number) => {
 
-          return <li>
+          return <li key={i}>
             <input onChange={onBoardChange} id ={name} type="radio" value={name} name="board" checked={currentBoard === name} />
             <label className={`${styles.label} heading_M`} htmlFor={name}>
               <div className={styles.icon}></div>

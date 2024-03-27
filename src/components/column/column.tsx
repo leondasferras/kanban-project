@@ -15,7 +15,7 @@ const Column = ({column}) => {
         {`${column.columnName} (${column.tasks.length})`}
       </span>
       {column.tasks.map((task) => {
-              return <ColumnItem task={task}/>
+              return <ColumnItem key={task.taskID} task={task}/>
       })}
 
 
