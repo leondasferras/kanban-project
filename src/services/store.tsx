@@ -55,9 +55,10 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
     },
     setNewTask:(newTask, columnName) => {
       set((state) => {
-        const columnToAdd = state.boards.find(board => board.boardName === state.currentBoard).columns.find(column => column.columnName === columnName)
+        const newState = { ...state };
+        const columnToAdd = newState.boards.find(board => board.boardName === newState.currentBoard).columns.find(column => column.columnName === columnName)
         columnToAdd.tasks.push(newTask)
-        return columnToAdd
+        return {...newState}
       })
     },
 
@@ -70,7 +71,11 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
     },
 
     
-    isEditTask: false,
+    isEditTaskModal: false,
+    setIsEditTaskModal: (payload) =>
+      set((state) => {
+        return {...state, isEditTaskModal: payload}
+      }),
 
     isDeleteTask: false,
     setIsDeleteTask:(payload) => {
@@ -80,9 +85,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
     },
     deleteTask:() => {
       set((state) => {
-        let taskList = state.boards.find(board => board.boardName === state.currentBoard).columns.find(column => column.columnName === state.currentColumn).tasks
-        let taskToDelete = taskList.findIndex(task => task.taskID === state.currentTask.taskID)
-        taskList.splice(taskToDelete,1)
+        let taskList = state.boards.find(board => board.boardName === state.currentBoard).columns.find(column => column.columnName === state.currentColumn)?.tasks
+        let taskToDelete = taskList?.findIndex(task => task.taskID === state.currentTask.taskID)
+        taskList?.splice(taskToDelete,1)
         return {state}
       })
     },
@@ -90,12 +95,9 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
 
     editTask: (payload) =>
       set((state) => {
-        let currentTask = state.boards
-          .find((board) => board.boardName === state.currentBoard)
-          .columns.find((column) => column.columnName === state.currentColumn)
-          .tasks.find((task) => task.taskID === state.currentTask.taskID);
-        currentTask = { ...payload };
-        return currentTask;
+      let newTask = {...state.currentTask, ...payload}
+
+        return newTask;
       }),
 
     replaceTask: (newColumnName) =>
@@ -123,7 +125,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
       isNewBoardModal: false,
       setIsNewBoardModal: (payload) => { 
         set((state) => {
-          return {...state, isEditBoardModal:payload}
+          return {...state, isNewBoardModal:payload}
         })
       },
       setNewBoard: (payload) => {
@@ -132,13 +134,47 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
           return state
         })
       },
-      
 
+      isEditBoardModal: false,
+      setIsEditBoardModal: (payload) => { 
+        set((state) => {
+          return {...state, isEditBoardModal:payload}
+        })
+      },
+      isDeleteBoardModal: false,
+      setIsDeleteBoardModal: (payload) => { 
+        set((state) => {
+          return {...state, isDeleteBoardModal:payload}
+        })
+      },
+
+      editBoard: (newBoard) => {
+        set((state) => {
+          const boardToChange = state.boards.findIndex(board => board.boardName === state.currentBoard)
+          const newBoards = state.boards
+          newBoards.splice(boardToChange, 1, newBoard)
+          const newCurrentBoard = '1321'
+          return {...state, boards: newBoards, currentBoard:newCurrentBoard}
+        })
+      },
+      
+      deleteBoard: () => {
+        set((state) => {
+          const boardToChange = state.boards.findIndex(board => board.boardName === state.currentBoard)
+          const newBoards = state.boards
+          newBoards.splice(boardToChange,1)
+          const newCurrentBoard = state.boards[0].boardName
+          return {...state, boards: newBoards, currentBoard: newCurrentBoard}
+        })
+      },
+      
     boards: [
       {
+        id:nanoid(),
         boardName: "board1",
         columns: [
           {
+            id: nanoid(),
             columnName: "Column1",
             tasks: [
               {
@@ -174,6 +210,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
             ],
           },
           {
+            id: nanoid(),
             columnName: "Column2",
             tasks: [
               {
@@ -211,9 +248,11 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
         ],
       },
       {
+        id:nanoid(),
         boardName: "board2",
         columns: [
           {
+            id: nanoid(),
             columnName: "Column22",
             tasks: [
               {
@@ -249,6 +288,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
             ],
           },
           {
+            id: nanoid(),
             columnName: "Column2",
             tasks: [
               {

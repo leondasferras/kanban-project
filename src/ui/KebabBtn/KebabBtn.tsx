@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import styles from './KebabBtn.module.css'
 
-const KebabBtn = ({onEdit, onDelete}) => {
+const KebabBtn = ({onEdit, onDelete, subject}) => {
 
   const [isKebabOpen, setIsKebabOpen] = useState(false)
 
@@ -10,8 +10,8 @@ const KebabBtn = ({onEdit, onDelete}) => {
     <div className={styles.wrapper}>
       <div className={styles.menuBtn} onClick={()=> setIsKebabOpen((prev => !prev))}></div>
 {  isKebabOpen && <ul className={`${styles.dropDown} text_medium`}>
-          <li className={styles.editButton}>Edit Task</li>
-          <li className={styles.deleteButton} onClick={onDelete}> Delete Task</li>
+          <li className={styles.editButton} onClick={onEdit} >Edit {subject}</li>
+          <li className={styles.deleteButton} onClick={onDelete}> Delete {subject}</li>
     </ul>}
   </div>
   )

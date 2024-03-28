@@ -5,7 +5,7 @@ import KebabBtn from "../../../../ui/KebabBtn/KebabBtn";
 import useTasks from "../../../../services/store";
 
 const OpenTask = () => {
-  const { currentTask, boards, editTask, currentBoard, replaceTask, currentColumn, setIsDeleteTask, setisTaskOpened } = useTasks();
+  const { currentTask, boards, editTask, currentBoard, replaceTask, currentColumn, setIsDeleteTask, setisTaskOpened, setIsEditTaskModal } = useTasks();
   const columns = boards.find(board => board.boardName === currentBoard).columns.map(column => column.columnName)
   const allSubtasksCounter = currentTask.subtasks.length;
   const doneSubtasksCounter = currentTask.subtasks.filter(
@@ -28,11 +28,16 @@ const OpenTask = () => {
     setisTaskOpened(false)
   }
 
+  const onEditTask = () => {
+    setisTaskOpened(false)
+    setIsEditTaskModal(true)
+  }
+
   return (
     <>
       <div className={styles.wrapper}>
         <p className="heading_L">{currentTask.taskName}</p>
-        <KebabBtn onDelete = {onDeleteTask}/>
+        <KebabBtn onDelete = {onDeleteTask} onEdit={onEditTask} subject="task"/>
       </div>
       <p className={`${styles.text} text_medium`}>{currentTask.description}</p>
       <ul className={`${styles.subtasks} text_bold`}>

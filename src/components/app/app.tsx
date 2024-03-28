@@ -11,23 +11,38 @@ import Newtask from "../modal/modals/newTask/newTask"
 import OpenTask from "../modal/modals/openTask/openTask"
 import DeleteModal from "../modal/modals/deleteModal/deleteModal"
 import NewBoard from "../modal/modals/newBoard/newBoard"
+import EditBoard from "../modal/modals/editBoard/editBoard"
+import EditTask from "../modal/modals/editTask/editTask"
 
 
 function App() {
 
-const {boards, setCurrentBoard, currentTask, setCurrentTask, isNewTask, setIsNewTask, isDeleteTask, setIsDeleteTask, setisTaskOpened, isTaskOpened, deleteTask, isEditBoardModal: isNewBoardModal, setIsNewBoardModal} = useTasks()
+const {boards, setCurrentBoard, currentTask, setCurrentTask, isNewTask, setIsNewTask, isDeleteTask, setIsDeleteTask, setisTaskOpened, isTaskOpened, deleteTask, isEditBoardModal, setIsEditBoardModal, isNewBoardModal, setIsNewBoardModal, isDeleteBoardModal, setIsDeleteBoardModal, deleteBoard, isEditTaskModal, setIsEditTaskModal} = useTasks()
 const [currentBoard, setCurrentTasks ] = useState(boards[0])
 const boardsNames = boards.map((board) => board.boardName)
 
-const onCancelDeletion = () => {
+
+
+const onDeleteTask = () => {
+  deleteTask()
+  setCurrentTask('')
+  setIsDeleteTask(false)
+}
+
+const onCancelTaskDeletion = () => {
   setisTaskOpened(true)
   setIsDeleteTask(false)
 }
 
-const onDelete = () => {
-  deleteTask()
-  setCurrentTask('')
-  setIsDeleteTask(false)
+
+const onDeleteBoard = () => {
+  deleteBoard()
+  setIsDeleteBoardModal(false)
+}
+
+const onCancelBoardDeletion = () => {
+  setIsEditBoardModal(true)
+  setIsDeleteBoardModal(false)
 }
 
 
@@ -53,11 +68,23 @@ useEffect(() => {
     }
 
     {
-      isDeleteTask && <Modal onClose = {() => setIsDeleteTask(false)}> <DeleteModal onDelete={onDelete} onCancel = {onCancelDeletion}/> </Modal>
+      isDeleteTask && <Modal onClose = {() => setIsDeleteTask(false)}> <DeleteModal onDelete={onDeleteTask} onCancel = {onCancelTaskDeletion}/> </Modal>
     }
 
     {
       isNewBoardModal && <Modal onClose = {() => setIsNewBoardModal(false)}> <NewBoard/></Modal>
+    }
+
+    {
+      isEditBoardModal && <Modal onClose = {() => setIsEditBoardModal(false)}> <EditBoard/></Modal>
+    }
+
+    {
+      isDeleteBoardModal && <Modal onClose = {() => setIsEditBoardModal(false)}> <DeleteModal  onDelete={onDeleteBoard} onCancel = {onCancelBoardDeletion}/></Modal>
+    }
+
+    {
+      isEditTaskModal && <Modal onClose = {() => setIsEditTaskModal(false)}> <EditTask/> </Modal>
     }
     </>
   )

@@ -4,16 +4,16 @@ import logoLight from "../../assets/logo-light.svg";
 import Button from "../../ui/Button/button";
 import Menu from '../../assets/icon-vertical-ellipsis.svg'
 import useTasks from "../../services/store";
+import KebabBtn from "../../ui/KebabBtn/KebabBtn";
 
 
 const Header = () => {
 
-  const {setIsNewTask} = useTasks()
+  const {setIsNewTask, setIsEditBoardModal, setIsDeleteBoardModal } = useTasks()
   const onNewTaskBtnClick = () => {
     setIsNewTask(true)
   }
 
-  const [isKebabOpen, setIsKebabOpen] = useState(false)
   const currentBoard = useTasks((state) => state.currentBoard)
   return (
     <header className= {styles.header}>
@@ -24,14 +24,9 @@ const Header = () => {
         <h1 className={` heading_XL`}>{currentBoard}</h1>
         <div className={styles.buttons}>
           <Button onClick ={onNewTaskBtnClick} size="large">+ Add New Task</Button>
-          <img className={styles.menuBtn} src={Menu} alt="" onClick={()=> setIsKebabOpen((prev => !prev))} />
-          { isKebabOpen 
-              && 
-          <ul className={`${styles.dropDown} text_medium`}>
-            <li className={styles.editButton}>Edit Board</li>
-            <li className={styles.deleteButton}> Delete Board</li>
-          </ul>
-          }
+          <KebabBtn subject="board" onEdit={() => setIsEditBoardModal(true)} onDelete={() => setIsDeleteBoardModal(true)}/>
+
+          
         </div>
       </div>
     </header>
