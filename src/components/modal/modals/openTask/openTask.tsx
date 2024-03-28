@@ -3,9 +3,10 @@ import Checkbox from "../../../../ui/Checkbox/checkbox";
 import Dropdown from "../../../../ui/Dropdown/dropdown";
 import KebabBtn from "../../../../ui/KebabBtn/KebabBtn";
 import useTasks from "../../../../services/store";
+import { nanoid } from "nanoid";
 
 const OpenTask = () => {
-  const { currentTask, boards, editTask, currentBoard, replaceTask, currentColumn, setIsDeleteTask, setisTaskOpened, setIsEditTaskModal } = useTasks();
+  const { currentTask, boards, editTask, currentBoard, replaceTask, currentColumn, setCurrentColumn,setIsDeleteTask, setisTaskOpened, setIsEditTaskModal } = useTasks();
   const columns = boards.find(board => board.boardName === currentBoard).columns.map(column => column.columnName)
   const allSubtasksCounter = currentTask.subtasks.length;
   const doneSubtasksCounter = currentTask.subtasks.filter(
@@ -15,12 +16,15 @@ const OpenTask = () => {
   const onCheckboxChange = (e) => {
     const newSubtask = currentTask.subtasks.find(subtask => subtask.id === e.target.id)
     newSubtask.isDone = !newSubtask.isDone
-    const newTask = {...currentTask, subtasks: [...currentTask.subtasks, newSubtask]}
-    editTask({...currentTask, subtasks: [...currentTask.subtasks, ], newTask  })
+    const newSubtaskList = [...currentTask.subtasks, newSubtask]
+    const newTask = {...currentTask}
+    editTask(newTask)
   }
 
   const onColumnChange = (newColumnName) => {
     replaceTask(newColumnName)
+    setCurrentColumn(newColumnName)
+
   }
 
   const onDeleteTask = () => {
@@ -43,7 +47,7 @@ const OpenTask = () => {
       <ul className={`${styles.subtasks} text_bold`}>
         Subtasks({doneSubtasksCounter} of {allSubtasksCounter})
         {currentTask.subtasks.map((subtask, i) => (
-          <li key={i}>
+          <li key={nanoid()}>
             <Checkbox title={subtask.name} onChange={onCheckboxChange} checked={subtask.isDone} id={subtask.id}/>
           </li>
         ))}

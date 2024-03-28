@@ -7,7 +7,7 @@ import { useState } from "react";
 import useTasks from "../../../../services/store";
 
 const Newtask = () => {
-  const { currentBoard, boards, setNewTask } = useTasks();
+  const { currentBoard, boards, setNewTask, setIsNewTask } = useTasks();
   const columnList = boards
     .find((board) => board.boardName === currentBoard)
     .columns.map((column) => column.columnName);
@@ -59,6 +59,7 @@ const Newtask = () => {
   const onCreateButtonClick = () => {
     const newTask = {...newTaskInfo, subtasks:subtasks}
     setNewTask(newTask, newTaskColumn)
+    setIsNewTask(false)
   }
 
   return (

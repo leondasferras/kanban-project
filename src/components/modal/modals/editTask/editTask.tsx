@@ -7,7 +7,7 @@ import { useState } from "react";
 import useTasks from "../../../../services/store";
 
 const EditTask = () => {
-  const { currentBoard, boards, currentTask, currentColumn, editTask } = useTasks();
+  const { currentBoard, boards, currentTask, currentColumn, editTask, replaceTask, setIsEditTaskModal, setCurrentTask } = useTasks();
   const columnList = boards
     .find((board) => board.boardName === currentBoard)
     .columns.map((column) => column.columnName);
@@ -50,11 +50,15 @@ const EditTask = () => {
 
   const onColumnChange = (columnName:string) => {
     setNewTaskColumn(columnName)
+
   }
 
   const onSaveButtonClick = () => {
     const newTask = {...newTaskInfo, subtasks:subtasks}
     editTask(newTask)
+    setCurrentTask(newTask)
+    replaceTask(newTaskColumn)
+    setIsEditTaskModal(false)
   }
 
   return (

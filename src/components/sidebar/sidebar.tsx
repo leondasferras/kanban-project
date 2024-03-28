@@ -9,7 +9,7 @@ import Icon  from '../../assets/icon-board.svg?react'
 
 
 const Sidebar:FC= () => {
-  const {currentBoard, boards, setCurrentBoard, setIsNewBoardModal} = useTasks();
+  const {currentBoard, boards, setCurrentBoard, setIsNewBoardModal, isSidebarShown, setIsSidebarShown} = useTasks();
   const boardsNames = boards.map((board:IBoard) => board.boardName)
 
   const onBoardChange = (e:any) => {
@@ -17,7 +17,7 @@ const Sidebar:FC= () => {
   }
 
   return (
-    <div className={styles.sidebar}>
+    isSidebarShown? (<div className={styles.sidebar}>
       <div className={`${styles.boardsCounter} text_medium`}>
         ALL BOARDS (3)
       </div>
@@ -40,11 +40,11 @@ const Sidebar:FC= () => {
               +Create New Board
             </div>
       <ThemeSwitch />
-      <div className={`${styles.hideSidebarBtn} heading_M`}>
-        <div className={styles.hideIcon}></div>
+      <div className={`${styles.hideSidebarBtn } heading_M`} onClick={() => setIsSidebarShown(false)}>
+        <div className={styles.hideIcon} ></div>
         Hide Sidebar
       </div>
-    </div>
+    </div>): <div className={styles.openSidebarBtn} onClick={() => setIsSidebarShown(true)}></div>
   );
 };
 

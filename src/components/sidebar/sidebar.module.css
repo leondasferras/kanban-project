@@ -104,3 +104,17 @@ box-sizing: border-box;
   fill: var(--main-purple)
 }
 
+.openSidebarBtn {
+  width: 100px;
+  height: 48px;
+  position: absolute;
+  left: -40px;
+  bottom: 30px;
+  border-radius: 30px ;
+  background:var(--main-purple) url('../../assets/icon-show-sidebar.svg') 70% 50% no-repeat ;
+}
+
+.openSidebarBtn:hover {
+  opacity: 70%;
+}
+

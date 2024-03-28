@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist, createJSONStorage } from "zustand/middleware";
 import { nanoid } from "nanoid";
 
 interface ISubtask {
@@ -28,7 +28,7 @@ interface useTasksState {
 }
 
 const useTasks = create<any, [["zustand/devtools", never]]>(
-  devtools((set) => ({
+  persist((set) => ({
     currentBoard: "",
     setCurrentBoard: (currentBoard) =>
       set((state) => {
@@ -93,33 +93,42 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
     },
 
 
-    editTask: (payload) =>
+    editTask: (editedTask) =>
       set((state) => {
-      let newTask = {...state.currentTask, ...payload}
-
-        return newTask;
+        const newState = {...state}
+        const currentTasklist = newState.boards.find(board => board.boardName === newState.currentBoard).columns.find(column => column.columnName === newState.currentColumn).tasks;
+        
+        const currentTask = currentTasklist.findIndex(task => task.taskID === editedTask.taskID)
+        currentTasklist.splice(currentTask, 1, editedTask)
+        return {...newState}
       }),
 
     replaceTask: (newColumnName) =>
       set((state) => {
-        const currentColumn = state.boards
-          .find((board) => board.boardName === state.currentBoard)
-          .columns.find((column) => column.columnName === state.currentColumn);
+        const newState = {...state}
 
-        const newColumn = state.boards
-          .find((board) => board.boardName === state.currentBoard)
-          .columns.find((column) => column.columnName == newColumnName);
-        const filteredTasks = currentColumn.tasks.filter(
-          (task) => task.taskID !== state.currentTask.taskID
+        const currentColumn = newState.boards
+          .find((board) => board.boardName === newState.currentBoard)
+          .columns.find((column) => column.columnName === newState.currentColumn);
+
+          console.log(currentColumn);
+          
+          const newColumn = state.boards
+          .find((board) => board.boardName === newState.currentBoard)
+          .columns.find((column) => column.columnName == newColumnName)
+          
+          console.log(newColumn);
+          const filteredTasks = currentColumn.tasks.filter(
+          (task) => task.taskID !== newState.currentTask.taskID
         );
         currentColumn.tasks = filteredTasks;
         if (
           !newColumn.tasks.find(
-            (task) => task.taskID == state.currentTask.taskID
+            (task) => task.taskID == newState.currentTask.taskID
           )
         )
-          newColumn.tasks.push(state.currentTask);
-        return state;
+          newColumn.tasks.push(newState.currentTask);
+        return {...newState};
       }),
 
       isNewBoardModal: false,
@@ -153,8 +162,7 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
           const boardToChange = state.boards.findIndex(board => board.boardName === state.currentBoard)
           const newBoards = state.boards
           newBoards.splice(boardToChange, 1, newBoard)
-          const newCurrentBoard = '1321'
-          return {...state, boards: newBoards, currentBoard:newCurrentBoard}
+          return {...state, boards: newBoards}
         })
       },
       
@@ -165,6 +173,12 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
           newBoards.splice(boardToChange,1)
           const newCurrentBoard = state.boards[0].boardName
           return {...state, boards: newBoards, currentBoard: newCurrentBoard}
+        })
+      },
+      isSidebarShown:true,
+      setIsSidebarShown:(payload) => {
+        set((state) => {
+          return {...state, isSidebarShown:payload}
         })
       },
       
@@ -326,7 +340,13 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
         ],
       },
     ],
-  }))
+  }),
+  {
+    name:'tasksStorage',
+    storage: createJSONStorage(() => sessionStorage)
+  }
+  )
+
 );
 
 export default useTasks;

@@ -24,7 +24,7 @@ const EditBoard = () => {
 
   const onColumnAdd = () => {
     const newColumns = [...columns]
-    const newColumn = {id:nanoid(), columnName: ''}
+    const newColumn = {id:nanoid(), columnName: '', tasks:[]}
     newColumns.push(newColumn)
     setColumns([...newColumns])
   }
