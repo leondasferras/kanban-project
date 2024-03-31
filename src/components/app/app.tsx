@@ -61,7 +61,7 @@ useEffect(() => {
      </Main>
 
     {
-    currentTask && isTaskOpened && <Modal onClose={() => setCurrentTask({
+    currentTask.taskName && isTaskOpened && <Modal onClose={() => setCurrentTask({
       taskID: '',
       taskName: '',
       description: '',
