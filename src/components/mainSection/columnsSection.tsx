@@ -12,7 +12,7 @@ const StyledColumnsSection = styled.section<{$isDarkTheme?:boolean}> `
   gap: 20px;
   justify-content: flex-start;
   padding-left: 24px;
-  width: auto;
+  width: 100%;
   height: 100%;
   overflow-x: scroll;
 `
@@ -29,10 +29,20 @@ const StyledNewColumnBtn = styled.div<{$isDarkTheme?:boolean}> `
   cursor: pointer;
   min-width: 280px;
 `
+const StyledEmptyBoardSection = styled.div<{$isDarkTheme?:boolean}> `
+  display: flex;
+  width: 100%;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: var(--medium-grey);
+  background-color: ${props => props.$isDarkTheme ? 'var(--dark-gray)':'var(--white)'};
+`
 
 const ColumnsSection = () => {
 
-const {currentBoard, setIsEditBoardModal, boards,isDarkTheme} = useTasks();
+const {currentBoard, setIsEditBoardModal, boards, isDarkTheme} = useTasks();
 const columns = boards.find((board) => board.boardName === currentBoard)?.columns;
 
 
@@ -42,10 +52,10 @@ const columns = boards.find((board) => board.boardName === currentBoard)?.column
       {columns?.map((column) => <Column column={column} key={column.id}/>)}
       <StyledNewColumnBtn className={`heading_XL`} onClick={() => setIsEditBoardModal(true)} $isDarkTheme={isDarkTheme}>  + New column </StyledNewColumnBtn>
     </StyledColumnsSection>) : 
-        <div className = {`${styles.emptyBoardSection} heading_L`}>
+        <StyledEmptyBoardSection className = {`heading_L`} $isDarkTheme={isDarkTheme}>
           <p className={styles.emptyBoardTitle}>This board is empty. Create a new column to get started.</p>
           <div onClick={() => setIsEditBoardModal(true)}><Button children='+ Add New Column'/></div>
-        </div>
+        </StyledEmptyBoardSection>
   )
 }
 
