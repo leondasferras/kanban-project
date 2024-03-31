@@ -46,13 +46,13 @@ const OpenTask = () => {
       <p className={`${styles.text} text_medium`}>{currentTask.description}</p>
       <ul className={`${styles.subtasks} text_bold`}>
         Subtasks({doneSubtasksCounter} of {allSubtasksCounter})
-        {currentTask.subtasks.map((subtask, i) => (
+        {currentTask.subtasks.map((subtask) => (
           <li key={nanoid()}>
             <Checkbox title={subtask.name} onChange={onCheckboxChange} checked={subtask.isDone} id={subtask.id}/>
           </li>
         ))}
       </ul>
-      <Dropdown options={[...columns]} onOptionChange = {onColumnChange} defaultOption= {currentColumn} />
+      <Dropdown options={[...columns!]} onOptionChange = {onColumnChange} defaultOption= {currentColumn} />
     </>
   );
 };

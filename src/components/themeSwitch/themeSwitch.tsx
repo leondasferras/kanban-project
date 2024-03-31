@@ -1,8 +1,5 @@
-
-
 import styled from "styled-components"
 import styles from './themeSwitch.module.css'
-import { useState } from "react"
 import useTasks from "../../services/store"
 
 const StyledThemeSwitch = styled.div<{$isDarkTheme?:boolean}> `
@@ -22,14 +19,9 @@ const StyledThemeSwitch = styled.div<{$isDarkTheme?:boolean}> `
       width: 100%
     }
   `
-
-
-
-
 export const ThemeSwitch = () => {
 
   const { isDarkTheme, setIsDarkTheme } = useTasks();
-  const [isDark, setIsDark] = useState(false);
 
   return (
     <StyledThemeSwitch $isDarkTheme={isDarkTheme}>

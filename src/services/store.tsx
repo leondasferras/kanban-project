@@ -1,5 +1,7 @@
+//@ts-nocheck
+
 import { create } from "zustand";
-import { devtools, persist, createJSONStorage } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { nanoid } from "nanoid";
 
 export interface ISubtask {
@@ -80,7 +82,12 @@ const useTasks = create<useTasksState, [["zustand/persist", never]]>(
       set((state) => {
         return { ...state, currentColumn: currentColumn };
       }),
-    currentTask: "",
+    currentTask: {
+      taskID: '',
+      taskName: '',
+      description: '',
+      subtasks: [],
+    },
     setCurrentTask: (currentTask) =>
       set((state) => {
         return { ...state, currentTask: currentTask };

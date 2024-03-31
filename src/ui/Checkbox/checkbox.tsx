@@ -1,6 +1,6 @@
 import styles from "./checkbox.module.css"
 import styled from "styled-components"
-import { FC } from "react"
+import { ChangeEvent, FC } from "react"
 import useTasks from "../../services/store"
 
 
@@ -24,7 +24,7 @@ cursor: pointer;
 `
 type Checkbox = {
   title: string;
-  onChange: () => void;
+  onChange: (e:ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
   id: string;
 }

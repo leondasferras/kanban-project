@@ -30,23 +30,23 @@ const Newtask = () => {
 
   const onSubtaskDelete = (e:MouseEvent) => {
     const newSubtasks = [...subtasks]
-    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === e.target?.dataset.id)
+    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === (e.target as HTMLInputElement).dataset.id)
     newSubtasks.splice(subtaskToDelete, 1)
     setSubtasks(newSubtasks)
   }
 
   const onSubtaskAdd = () => {
     const newSubtasks = [...subtasks]
-    newSubtasks.push({id:nanoid(), isDone: false})
+    newSubtasks.push({id:nanoid(), isDone: false, name:''})
     setSubtasks(newSubtasks)
   }
 
-  const onTitleChange = (e) => {
+  const onTitleChange = (e:ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value 
     setNewTaskInfo({...newTaskInfo, taskName: newTitle})
   }
 
-  const onDescriptionChange = (e) => {
+  const onDescriptionChange = (e:ChangeEvent<HTMLInputElement>) => {
     const newDescription = e.target.value
     setNewTaskInfo({...newTaskInfo, description: newDescription})
   }
@@ -56,7 +56,7 @@ const Newtask = () => {
   }
 
   const onCreateButtonClick = () => {
-    const newTask = {...newTaskInfo, subtasks:subtasks}
+    const newTask = {...newTaskInfo, subtasks:subtasks, taskID: nanoid()}
     setNewTask(newTask, newTaskColumn)
     setIsNewTask(false)
   }
@@ -87,7 +87,7 @@ const Newtask = () => {
         ))}
         <Button mode="secondary"  onClick={onSubtaskAdd}>+Add New Subtask</Button>
       </div>
-      <Dropdown label="Status" options={[...columnList]} onOptionChange={onColumnChange}/>
+      <Dropdown label="Status" options={[...columnList!]} onOptionChange={onColumnChange}/>
       <Button onClick={onCreateButtonClick}>Create Task</Button>
     </div>
   );
