@@ -26,3 +26,10 @@
   height: 100vh;
   z-index: 1;
   }
+
+
+  @media screen and ( max-width: 680px ) {
+    .modal {
+      width: calc(100% - 100px)
+    }
+  }

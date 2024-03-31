@@ -1,37 +1,36 @@
 import { nanoid } from "nanoid";
+import { ChangeEvent, useState } from "react";
 import styles from "./newTask.module.css";
 import Input from "../../../../ui/Input/input";
 import Button from "../../../../ui/Button/button";
 import Dropdown from "../../../../ui/Dropdown/dropdown";
-import { useState } from "react";
 import useTasks from "../../../../services/store";
 
 const Newtask = () => {
   const { currentBoard, boards, setNewTask, setIsNewTask } = useTasks();
   const columnList = boards
     .find((board) => board.boardName === currentBoard)
-    .columns.map((column) => column.columnName);
+    ?.columns.map((column) => column.columnName);
 
   const [subtasks, setSubtasks] = useState([
-    { id: nanoid(), isDone: false },
-    { id: nanoid(), isDone: false },
-    { id: nanoid(), isDone: false },
+    { id: nanoid(), isDone: false, name:'' },
+    { id: nanoid(), isDone: false, name:'' },
+    { id: nanoid(), isDone: false, name:'' },
   ]);
 
   const [newTaskInfo, setNewTaskInfo] = useState({taskName:'', description:''});
   const [newTaskColumn, setNewTaskColumn] = useState('');
 
-  const onSubtaskChange = (e) => {
+  const onSubtaskChange = (e:ChangeEvent<HTMLInputElement>) => {
    const newSubtasks = [...subtasks]
    const subtaskToChange = newSubtasks.find(subtask => subtask.id === e.target.name)
-   subtaskToChange.name = e.target.value
+   subtaskToChange!.name = e.target.value
    setSubtasks(newSubtasks)
   };
 
-  const onSubtaskDelete = (e) => {
+  const onSubtaskDelete = (e:MouseEvent) => {
     const newSubtasks = [...subtasks]
-    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === e.target.dataset.id)
-    console.log(e.target)
+    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === e.target?.dataset.id)
     newSubtasks.splice(subtaskToDelete, 1)
     setSubtasks(newSubtasks)
   }

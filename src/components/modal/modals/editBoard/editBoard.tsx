@@ -1,21 +1,21 @@
 import styles from "./editBoard.module.css";
 import Input from "../../../../ui/Input/input";
 import Button from "../../../../ui/Button/button";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { nanoid } from "nanoid";
 import useTasks from "../../../../services/store";
 
 const EditBoard = () => {
   const { setIsEditBoardModal, currentBoard, boards, editBoard, setCurrentBoard  } = useTasks();
   const [name, setName] = useState(currentBoard);
-  const [columns, setColumns] = useState(boards.find( board => board.boardName === currentBoard).columns);
+  const [columns, setColumns] = useState(boards?.find( board => board.boardName === currentBoard)!.columns);
 
 
-  const onNameChange = (e) => {
+  const onNameChange = (e:ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
   }
 
-  const onColumnChange = (e) => {
+  const onColumnChange = (e:ChangeEvent<HTMLInputElement>) => {
     const newColumns = [...columns]
     const currentColumn = newColumns.find(column => column.id === e.target.name)
     currentColumn!.columnName = e.target.value
@@ -29,15 +29,15 @@ const EditBoard = () => {
     setColumns([...newColumns])
   }
 
-  const onColumnRemove = (e) => {
+  const onColumnRemove = (e:MouseEvent) => {
     const newColumns = [...columns]
-    const columnToRemove = newColumns.findIndex(column => column.id === e.target.dataset.id)
+    const columnToRemove = newColumns.findIndex(column => column.id === e.target?.dataset.id)
     newColumns.splice(columnToRemove,1)
     setColumns([...newColumns])
   }
 
   const onBoarEdit = () => {
-    const newBoard = {boardName:name, columns:columns}
+    const newBoard = {boardName:name, columns:columns, id: nanoid()}
     editBoard(newBoard)
     setCurrentBoard(newBoard.boardName)
     setIsEditBoardModal(false)

@@ -29,7 +29,6 @@ input[type = checkbox] {
   justify-content: flex-start;
   align-items: center;
   padding: 3px 3px;
-  transition: all 1s linear;
   margin: 0 20px;
 }
 
@@ -42,10 +41,9 @@ input[type = checkbox] {
   height: 14px;
   border-radius: 50px;
   background-color: var(--white);
-  transition: all 1s linear;
 }
 
 input[type="checkbox"]:checked ~ label  {
   justify-content: flex-end;
-  transition: all 1s linear;
 }
+

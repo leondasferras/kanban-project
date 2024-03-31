@@ -1,10 +1,21 @@
+import { ChangeEvent } from "react";
 import styled from "styled-components";
 import styles from "./input.module.css";
+import useTasks from "../../services/store";
 
 
+const StyledInputWrapper = styled.div<{$isDarkTheme?:boolean}>  `
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: inherit;
+  color:${props => props.$isDarkTheme ? 'var(--white)':'var(--black)'};
+  `
 
 
-const StyledInput = styled.input `
+const StyledInput = styled.input<{$isDarkTheme?:boolean}>`
+  color:${props => props.$isDarkTheme ? 'var(--white)':'var(--black)'};
+  background-color: ${props => props.$isDarkTheme ? 'var(--dark-gray)':'var(--white)'};
   min-height: 40px;
   width: 100%;
   outline: none;
@@ -13,7 +24,7 @@ const StyledInput = styled.input `
   box-sizing: border-box;
   padding: 0 16px;
   &::placeholder {
-    color: rgba(0, 1, 18, .25);
+    color: var(--medium-grey);
   }
 `
 
@@ -24,7 +35,7 @@ type InputProps = {
   removable?: boolean,
   placeHolder?: string,
   value?: string;
-  onChange?: (e) => void;
+  onChange?: (e:ChangeEvent<HTMLInputElement>) => void;
   onDelete?: (e) => void;
   name?: string;
 
@@ -33,14 +44,16 @@ type InputProps = {
 
 const Input:React.FC<InputProps> = ({label, removable, placeHolder, onChange, onDelete, name, value}) => {
 
+  const { isDarkTheme } = useTasks()
+
   return (
-    <div className={`${styles.wrapper} text_bold`}>
-    <label className={styles.label}> {label} </label>
+    <StyledInputWrapper className={`text_bold`} $isDarkTheme={isDarkTheme}>
+    <label>{label} </label>
     <div className={styles.inputWrapper}>
-      <StyledInput className="text_medium" placeholder={placeHolder} onChange={onChange} name={name} value={value}/>
+      <StyledInput className="text_medium" placeholder={placeHolder} onChange={onChange} name={name} value={value} $isDarkTheme={isDarkTheme} />
       { removable && <div data-id={name} onClick={onDelete} className={styles.deleteBtn}></div>}
     </div>
-    </div>
+    </StyledInputWrapper>
   )
 }
 

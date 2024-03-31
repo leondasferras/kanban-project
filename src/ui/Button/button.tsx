@@ -3,7 +3,7 @@ import styled from "styled-components";
 type buttonProps = {
   mode?: 'primary' | 'secondary' | 'destructive';
   size?: 'large' | 'small' ;
-  children: string;
+  children: any;
   onClick?: ()=> void;
 }
 
@@ -19,6 +19,7 @@ const StyledButton = styled.button<buttonProps> `
   color: var(--white);
   border: none;
   height: ${({size}) => size === "small" ? '40px' : '48px'};
+  cursor: pointer;
 
   ${({mode}) => 
    {

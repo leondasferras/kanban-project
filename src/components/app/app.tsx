@@ -68,7 +68,7 @@ useEffect(() => {
     }
 
     {
-      isDeleteTask && <Modal onClose = {() => setIsDeleteTask(false)}> <DeleteModal onDelete={onDeleteTask} onCancel = {onCancelTaskDeletion}/> </Modal>
+      isDeleteTask && <Modal onClose = {() => setIsDeleteTask(false)}> <DeleteModal subject = {'task'} onDelete={onDeleteTask} onCancel = {onCancelTaskDeletion}/> </Modal>
     }
 
     {
@@ -80,7 +80,7 @@ useEffect(() => {
     }
 
     {
-      isDeleteBoardModal && <Modal onClose = {() => setIsEditBoardModal(false)}> <DeleteModal  onDelete={onDeleteBoard} onCancel = {onCancelBoardDeletion}/></Modal>
+      isDeleteBoardModal && <Modal onClose = {() => setIsEditBoardModal(false)}> <DeleteModal subject = {'board'} onDelete={onDeleteBoard} onCancel = {onCancelBoardDeletion}/></Modal>
     }
 
     {

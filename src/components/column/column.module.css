@@ -1,9 +1,3 @@
-.listTitle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
 
 .titleIcon {
   height: 15px;
@@ -13,8 +7,10 @@
 
 .taskList {
   display: flex;
+  margin-top: 10px;
   flex-direction: column;
   list-style: none;
+  min-width: 280px;
   gap:20px;
   padding: 0;
 }

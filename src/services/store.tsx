@@ -2,33 +2,74 @@ import { create } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
 import { nanoid } from "nanoid";
 
-interface ISubtask {
+export interface ISubtask {
+  id: string;
   name: string;
   isDone: boolean;
 }
 
-interface ITask {
+export interface ITask {
+  taskID: string;
   taskName: string;
   description: string;
   subtasks: Array<ISubtask>;
 }
 
-interface IColumn {
+export interface IColumn {
+  id: string;
   columnName: string;
   tasks: Array<ITask>;
 }
 
 export interface IBoard {
+  id: string;
   boardName: string;
   columns: Array<IColumn>;
 }
 
 interface useTasksState {
+  isDarkTheme: boolean;
+  setIsDarkTheme: (arg:boolean) => void;
   boards: Array<IBoard>;
+  currentBoard: string,
+  setCurrentBoard: (arg:string) => void;
+  currentColumn: string;
+  setCurrentColumn: (arg:string) => void;
+  currentTask: ITask;
+  setCurrentTask: (arg:ITask) => void;
+  isNewTask: boolean;
+  setIsNewTask:(arg: boolean) => void;
+  setNewTask: (task:ITask, column:string) => void;
+  isTaskOpened: boolean;
+  setisTaskOpened: (arg: boolean) => void;
+  isEditTaskModal: boolean;
+  setIsEditTaskModal: (arg: boolean) => void;
+  isDeleteTask: boolean;
+  setIsDeleteTask: (arg: boolean) => void;
+  deleteTask: ()=> void;
+  editTask:(task:ITask) => void;
+  replaceTask:(columnName:string)=>void;
+  isNewBoardModal: boolean;
+  setIsNewBoardModal: (arg: boolean) => void;
+  setNewBoard: (board:IBoard) => void;
+  isEditBoardModal: boolean,
+  setIsEditBoardModal: (arg:boolean) => void;
+  isDeleteBoardModal: boolean,
+  setIsDeleteBoardModal: (arg: boolean) => void;
+  editBoard:(board: IBoard) => void;
+  deleteBoard: () => void;
+  isSidebarShown: boolean;
+  setIsSidebarShown: (arg: boolean) => void;
 }
 
-const useTasks = create<any, [["zustand/devtools", never]]>(
+const useTasks = create<useTasksState, [["zustand/persist", never]]>(
   persist((set) => ({
+    isDarkTheme: false,
+    setIsDarkTheme:(arg) => {
+      set((state) => {
+        return { ...state, isDarkTheme: arg };
+      })
+    },
     currentBoard: "",
     setCurrentBoard: (currentBoard) =>
       set((state) => {
@@ -56,8 +97,8 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
     setNewTask:(newTask, columnName) => {
       set((state) => {
         const newState = { ...state };
-        const columnToAdd = newState.boards.find(board => board.boardName === newState.currentBoard).columns.find(column => column.columnName === columnName)
-        columnToAdd.tasks.push(newTask)
+        const columnToAdd = newState.boards.find(board => board.boardName === newState.currentBoard)?.columns.find(column => column.columnName === columnName)
+        columnToAdd?.tasks.push(newTask)
         return {...newState}
       })
     },
@@ -97,7 +138,6 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
       set((state) => {
         const newState = {...state}
         const currentTasklist = newState.boards.find(board => board.boardName === newState.currentBoard).columns.find(column => column.columnName === newState.currentColumn).tasks;
-        
         const currentTask = currentTasklist.findIndex(task => task.taskID === editedTask.taskID)
         currentTasklist.splice(currentTask, 1, editedTask)
         return {...newState}
@@ -110,18 +150,15 @@ const useTasks = create<any, [["zustand/devtools", never]]>(
         const currentColumn = newState.boards
           .find((board) => board.boardName === newState.currentBoard)
           .columns.find((column) => column.columnName === newState.currentColumn);
-
-          console.log(currentColumn);
-          
           const newColumn = state.boards
           .find((board) => board.boardName === newState.currentBoard)
           .columns.find((column) => column.columnName == newColumnName)
-          
-          console.log(newColumn);
           const filteredTasks = currentColumn.tasks.filter(
           (task) => task.taskID !== newState.currentTask.taskID
         );
         currentColumn.tasks = filteredTasks;
+
+        
         if (
           !newColumn.tasks.find(
             (task) => task.taskID == newState.currentTask.taskID

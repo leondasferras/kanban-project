@@ -16,7 +16,7 @@
   padding: 16px;
   box-sizing: border-box;
   list-style: none;
-  background-color: var(--white);
+  background-color: inherit;
   gap: 16px;
   color: var(--black);
   max-width: 192px;
@@ -25,9 +25,11 @@
 
 .editButton {
   color: var(--medium-grey);
+  cursor: pointer;
 }
 .deleteButton {
   color: var(--red);
+  cursor: pointer;
 }
 
 .wrapper {

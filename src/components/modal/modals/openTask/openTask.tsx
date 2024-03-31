@@ -4,24 +4,24 @@ import Dropdown from "../../../../ui/Dropdown/dropdown";
 import KebabBtn from "../../../../ui/KebabBtn/KebabBtn";
 import useTasks from "../../../../services/store";
 import { nanoid } from "nanoid";
+import { ChangeEvent } from "react";
 
 const OpenTask = () => {
   const { currentTask, boards, editTask, currentBoard, replaceTask, currentColumn, setCurrentColumn,setIsDeleteTask, setisTaskOpened, setIsEditTaskModal } = useTasks();
-  const columns = boards.find(board => board.boardName === currentBoard).columns.map(column => column.columnName)
+  const columns = boards.find(board => board.boardName === currentBoard)?.columns.map(column => column.columnName)
   const allSubtasksCounter = currentTask.subtasks.length;
   const doneSubtasksCounter = currentTask.subtasks.filter(
     (subtask) => subtask.isDone === true
   ).length;
   
-  const onCheckboxChange = (e) => {
+  const onCheckboxChange = (e:ChangeEvent<HTMLInputElement>) => {
     const newSubtask = currentTask.subtasks.find(subtask => subtask.id === e.target.id)
-    newSubtask.isDone = !newSubtask.isDone
-    const newSubtaskList = [...currentTask.subtasks, newSubtask]
+    newSubtask!.isDone = !newSubtask!.isDone
     const newTask = {...currentTask}
     editTask(newTask)
   }
 
-  const onColumnChange = (newColumnName) => {
+  const onColumnChange = (newColumnName:string) => {
     replaceTask(newColumnName)
     setCurrentColumn(newColumnName)
 

@@ -1,14 +1,8 @@
-.header {
+.title {
   display: flex;
+  flex-direction: row;
+  gap:5px;
   align-items: center;
-  background-color: var(--white);
-
-}
-
-.logo {
-  box-sizing: border-box;
-  padding: 0 114px 0 34px;
-  height: 100%;
 }
 
 .wrapper {
@@ -53,3 +47,4 @@
 .deleteButton {
   color: var(--red);
 }
+

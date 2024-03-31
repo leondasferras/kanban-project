@@ -1,10 +1,14 @@
-.sidebar {
+/* .sidebar {
   width: 301px;
+  height: 100%;
   box-sizing: border-box;
   border-right: 1px solid var(--lines-light);
   padding: 15px 24px;
   background-color: var(--white);
-}
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
 
 .boardsCounter {
   color: var(--medium-grey);
@@ -98,6 +102,7 @@ box-sizing: border-box;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .createBtnIcon svg {

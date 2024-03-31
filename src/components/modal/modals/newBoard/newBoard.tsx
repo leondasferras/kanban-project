@@ -1,7 +1,7 @@
 import styles from "./newBoard.module.css";
 import Input from "../../../../ui/Input/input";
 import Button from "../../../../ui/Button/button";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { nanoid } from "nanoid";
 import useTasks from "../../../../services/store";
 
@@ -10,14 +10,14 @@ const NewBoard = () => {
   const [columns, setColumns] = useState([{ id: nanoid(), columnName:'', tasks:[]}, { id: nanoid(), columnName:'', tasks:[]}, { id: nanoid(), columnName:'',  tasks:[]}]);
   const { setNewBoard, setIsNewBoardModal } = useTasks();
 
-  const onNameChange = (e) => {
+  const onNameChange = (e:ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
   }
 
-  const onColumnChange = (e) => {
+  const onColumnChange = (e:MouseEvent) => {
     const newColumns = [...columns]
-    const currentColumn = newColumns.find(column => column.id === e.target.name)
-    currentColumn!.columnName = e.target.value
+    const currentColumn = newColumns.find(column => column.id === e.target!.name)
+    currentColumn!.columnName = e.target?.value
     setColumns([...newColumns])
   }
 

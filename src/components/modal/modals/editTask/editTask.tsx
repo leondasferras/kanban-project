@@ -1,32 +1,32 @@
 import { nanoid } from "nanoid";
+import { ChangeEvent, useState } from "react";
 import styles from "./editTask.module.css";
 import Input from "../../../../ui/Input/input";
 import Button from "../../../../ui/Button/button";
 import Dropdown from "../../../../ui/Dropdown/dropdown";
-import { useState } from "react";
 import useTasks from "../../../../services/store";
 
 const EditTask = () => {
   const { currentBoard, boards, currentTask, currentColumn, editTask, replaceTask, setIsEditTaskModal, setCurrentTask } = useTasks();
   const columnList = boards
     .find((board) => board.boardName === currentBoard)
-    .columns.map((column) => column.columnName);
+    ?.columns.map((column) => column.columnName);
 
   const [subtasks, setSubtasks] = useState(currentTask.subtasks);
 
-  const [newTaskInfo, setNewTaskInfo] = useState({taskName:currentTask.taskName, description:currentTask.description});
-  const [newTaskColumn, setNewTaskColumn] = useState('');
+  const [newTaskInfo, setNewTaskInfo] = useState({taskID:currentTask.taskID, taskName:currentTask.taskName, description:currentTask.description});
+  const [newTaskColumn, setNewTaskColumn] = useState<string | null>(null);
 
-  const onSubtaskChange = (e) => {
+  const onSubtaskChange = (e:ChangeEvent<HTMLInputElement>) => {
    const newSubtasks = [...subtasks]
    const subtaskToChange = newSubtasks.find(subtask => subtask.id === e.target.name)
-   subtaskToChange.name = e.target.value
+   subtaskToChange!.name = e.target.value
    setSubtasks(newSubtasks)
   };
 
-  const onSubtaskDelete = (e) => {
+  const onSubtaskDelete = (e:MouseEvent) => {
     const newSubtasks = [...subtasks]
-    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === e.target.dataset.id)
+    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === e.target?.dataset.id)
     console.log(e.target)
     newSubtasks.splice(subtaskToDelete, 1)
     setSubtasks(newSubtasks)
@@ -34,16 +34,16 @@ const EditTask = () => {
 
   const onSubtaskAdd = () => {
     const newSubtasks = [...subtasks]
-    newSubtasks.push({id:nanoid(), isDone: false})
+    newSubtasks.push({id:nanoid(), isDone: false, name:''})
     setSubtasks(newSubtasks)
   }
 
-  const onTitleChange = (e) => {
+  const onTitleChange = (e:ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value 
     setNewTaskInfo({...newTaskInfo, taskName: newTitle})
   }
 
-  const onDescriptionChange = (e) => {
+  const onDescriptionChange = (e:ChangeEvent<HTMLInputElement>) => {
     const newDescription = e.target.value
     setNewTaskInfo({...newTaskInfo, description: newDescription})
   }
@@ -57,9 +57,11 @@ const EditTask = () => {
     const newTask = {...newTaskInfo, subtasks:subtasks}
     editTask(newTask)
     setCurrentTask(newTask)
-    replaceTask(newTaskColumn)
-    setIsEditTaskModal(false)
-  }
+    console.log('cur',currentColumn,'new', newTaskColumn)
+    if (currentColumn !== newTaskColumn && newTaskColumn !== null ) {replaceTask(newTaskColumn);
+    }
+    setIsEditTaskModal(false)}
+
 
   return (
     <div className={`${styles.wrapper}`}>
