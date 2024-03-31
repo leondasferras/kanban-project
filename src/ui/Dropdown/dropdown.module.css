@@ -1,0 +1,34 @@
+.dropdownItem {
+  list-style: none;
+  color:var(--medium-grey);
+  padding: 8px 0;
+  width: 100%;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.dropdownItem:hover{
+  opacity: 50%;
+
+}
+
+.icon {
+  background: url('../../assets/icon-chevron-down.svg') center no-repeat;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: visible;
+}
+
+.dropdown {
+  position: relative;
+  background-color: inherit;
+}

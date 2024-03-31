@@ -1,0 +1,24 @@
+.wrapper {
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  color: var(--red);
+}
+
+.text {
+  color: var(--medium-grey);
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 12px;
+}
+
+@media screen and (max-width: 500px) {
+  .buttonsWrapper {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,50 @@
+.title {
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 29px 30px 29px 24px;;
+  border-left: 1px solid var(--lines-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--lines-light);
+}
+
+.buttons {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.menuBtn {
+  height: 20px;
+  cursor: pointer;
+}
+
+.dropDown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right:0;
+  top:20px;
+  border-radius: 8px;
+  padding: 16px;
+  list-style: none;
+  background-color: var(--white);
+  gap: 16px;
+  color: var(--black);
+}
+
+.editButton {
+  color: var(--medium-grey);
+}
+.deleteButton {
+  color: var(--red);
+}
+

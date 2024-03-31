@@ -1,0 +1,31 @@
+.addColumnBtn {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  background-color: var(--lines-light);
+  border-radius: 8px;
+  color: var(--medium-grey);
+  width: 280px;
+  cursor: pointer;
+  min-width: 280px;
+}
+
+.addColumnBtn:hover {
+  color: var(--main-purple)
+}
+
+.emptyBoardSection {
+  display: flex;
+  width: 100%;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: var(--medium-grey)
+}
+
+.emptyBoardTitle {
+text-align: center;
+}

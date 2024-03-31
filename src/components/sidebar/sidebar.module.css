@@ -1,0 +1,125 @@
+/* .sidebar {
+  width: 301px;
+  height: 100%;
+  box-sizing: border-box;
+  border-right: 1px solid var(--lines-light);
+  padding: 15px 24px;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+.boardsCounter {
+  color: var(--medium-grey);
+  letter-spacing: 2.4px;
+}
+
+.boardList {
+  list-style: none;
+  padding: 0;
+}
+
+.icon {
+  height: 16px;
+  width: 16px;
+}
+
+.icon  svg {
+  fill:var(--medium-grey);
+}
+
+input[type = radio] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+.label {
+  max-width: 240px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  color: var(--medium-grey);
+  gap: 12px;
+  padding: 14px 0 14px 24px;
+  margin-left: -30px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-sizing: border-box;
+}
+
+input[type = radio]:checked + label {
+  background-color: var(--main-purple);
+  color: var(--white)
+}
+
+input[type = radio]:checked + label svg {
+  fill: var(--white);
+}
+
+input[type = radio]:not(:checked) + label:hover {
+  background-color: var(--light-grey);
+}
+
+.hideSidebarBtn {
+display: flex;
+gap: 15px;
+align-items: center;
+color: var(--medium-grey);
+padding: 14px 0 14px 24px;
+margin-left: -30px;
+border-top-right-radius: 50px;
+border-bottom-right-radius: 50px;
+box-sizing: border-box;
+}
+
+.hideIcon {
+  width: 18px;
+  height: 18px;
+  background: url('../../assets/icon-hide-sidebar.svg') no-repeat;
+}
+
+.hideSidebarBtn:hover {
+  background-color: var(--light-grey);
+  max-width: 240px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  color: var(--main-purple)
+}
+
+.createBoardBtn {
+  max-width: 240px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  color: var(--main-purple);
+  gap: 12px;
+  padding: 14px 0 14px 24px;
+  margin-left: -30px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.createBtnIcon svg {
+  fill: var(--main-purple)
+}
+
+.openSidebarBtn {
+  width: 100px;
+  height: 48px;
+  position: absolute;
+  left: -40px;
+  bottom: 30px;
+  border-radius: 30px ;
+  background:var(--main-purple) url('../../assets/icon-show-sidebar.svg') 70% 50% no-repeat ;
+}
+
+.openSidebarBtn:hover {
+  opacity: 70%;
+}
+

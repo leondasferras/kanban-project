@@ -1,0 +1,16 @@
+
+.deleteBtn {
+  width: 15px;
+  height: 15px;
+  background: url('../../assets/icon-cross.svg') center no-repeat;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.inputWrapper {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  align-items: center;
+  gap: 8px;
+}
+
