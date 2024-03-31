@@ -1,11 +1,11 @@
-import styles from './column.module.css'
-
-import ColumnItem from '../columnItem/columnItem';
-import useTasks from '../../services/store';
 import { useMemo } from 'react';
-import { IColumn } from '../../services/store';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
+import styles from './column.module.css'
+import ColumnItem from '../columnItem/columnItem';
+import useTasks from '../../services/store';
+import { IColumn } from '../../services/store';
+
 
 const StyledlistTitle = styled.span<{$isDarkTheme?:boolean}> `
   display: flex;

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import styles from "./columnItem.module.css"
 import useTasks from '../../services/store';
 import { ITask } from "../../services/store";

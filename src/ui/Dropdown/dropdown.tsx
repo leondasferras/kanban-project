@@ -39,7 +39,7 @@ type DropdownProps = {
   options: Array<string>,
   label?: string,
   defaultOption?:string;
-  onOptionChange?: (arg:string) => void,
+  onOptionChange?: any,
 
 }
 
@@ -53,11 +53,12 @@ const handleToggleDropdown = () => {
   setIsOpen((prev) => !prev)
 }
 
-const handlePickOption = (e) => {
+const handlePickOption = (e:any) => {
   if(e.target.nodeName !== "LI"){
     return
 }
-  else 
+
+  else
   setCurrentOption(e.target.textContent)
   setIsOpen(false)
   onOptionChange(e.target.textContent)

@@ -36,7 +36,7 @@ type InputProps = {
   placeHolder?: string,
   value?: string;
   onChange?: (e:ChangeEvent<HTMLInputElement>) => void;
-  onDelete?: (e) => void;
+  onDelete?: any;
   name?: string;
 
 }

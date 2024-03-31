@@ -14,9 +14,10 @@ const NewBoard = () => {
     setName(e.target.value)
   }
 
-  const onColumnChange = (e:MouseEvent) => {
+  const onColumnChange = (e:ChangeEvent) => {
     const newColumns = [...columns]
-    const currentColumn = newColumns.find(column => column.id === e.target!.name)
+    if (!(e.target instanceof HTMLInputElement)) return;
+    const currentColumn = newColumns.find(column => column.id === (e.target as HTMLInputElement).name)
     currentColumn!.columnName = e.target?.value
     setColumns([...newColumns])
   }
@@ -28,15 +29,15 @@ const NewBoard = () => {
     setColumns([...newColumns])
   }
 
-  const onColumnRemove = (e) => {
+  const onColumnRemove = (e:MouseEvent) => {
     const newColumns = [...columns]
-    const columnToRemove = newColumns.findIndex(column => column.id === e.target.dataset.id)
+    const columnToRemove = newColumns.findIndex(column => column.id === (e.target as HTMLInputElement).dataset.id)
     newColumns.splice(columnToRemove,1)
     setColumns([...newColumns])
   }
 
   const onBoardAdd = () => {
-    const newBoard = {boardName:name, columns:columns}
+    const newBoard = {boardName:name, columns:columns, id:nanoid()}
     setNewBoard(newBoard)
     setIsNewBoardModal(false)
 

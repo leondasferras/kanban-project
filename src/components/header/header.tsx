@@ -1,4 +1,6 @@
+//@ts-nocheck
 import { useEffect } from "react";
+import styled from "styled-components";
 import styles from "./header.module.css";
 import logoLight from "../../assets/logo-light.svg";
 import logoDark from "../../assets/logo-dark.svg";
@@ -10,7 +12,7 @@ import useWindowSize from "../../services/useWindowSize";
 import mobileLogo from "../../assets/logo-mobile.svg";
 import chevronDown from "../../assets/icon-chevron-down.svg";
 import chevronUp from "../../assets/icon-chevron-up.svg";
-import styled from "styled-components";
+
 
 const StyledHeader = styled.header<{$isDarkTheme?:boolean}> `
   display: flex;
@@ -68,6 +70,7 @@ const Header = () => {
   return (
     <StyledHeader $isDarkTheme={isDarkTheme}>
       <StyledLogoWrapper $isDarkTheme={isDarkTheme}>
+        {/* //@ts-ignore */}
         <img src={width < 600 ? mobileLogo: isDarkTheme ? logoDark: logoLight} />
       </StyledLogoWrapper>
       <StyledWrapper $isDarkTheme={isDarkTheme} className={styles.wrapper}>

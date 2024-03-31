@@ -26,8 +26,13 @@ const EditTask = () => {
 
   const onSubtaskDelete = (e:MouseEvent) => {
     const newSubtasks = [...subtasks]
-    const subtaskToDelete = newSubtasks.findIndex(subtask => subtask.id === e.target?.dataset.id)
-    console.log(e.target)
+    const subtaskToDelete = newSubtasks.findIndex((subtask) => 
+    {
+      if (!(e.target instanceof HTMLElement)) return
+      subtask.id === e.target?.dataset.id
+      
+    })
+
     newSubtasks.splice(subtaskToDelete, 1)
     setSubtasks(newSubtasks)
   }
@@ -90,7 +95,7 @@ const EditTask = () => {
         ))}
         <Button mode="secondary"  onClick={onSubtaskAdd}>+Add New Subtask</Button>
       </div>
-      <Dropdown label="Status" options={[...columnList]} onOptionChange={onColumnChange} defaultOption={currentColumn}/>
+      <Dropdown label="Status" options={[...columnList!]} onOptionChange={onColumnChange} defaultOption={currentColumn}/>
       <Button onClick={onSaveButtonClick}>Save Changes</Button>
     </div>
   );

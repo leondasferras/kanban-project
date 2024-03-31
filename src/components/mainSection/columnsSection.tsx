@@ -39,7 +39,7 @@ const columns = boards.find((board) => board.boardName === currentBoard)?.column
   return (
     columns && columns?.length > 0 ?
     (<StyledColumnsSection $isDarkTheme={isDarkTheme}>
-      {columns?.map((column, i) => <Column column={column} key={column.id}/>)}
+      {columns?.map((column) => <Column column={column} key={column.id}/>)}
       <StyledNewColumnBtn className={`heading_XL`} onClick={() => setIsEditBoardModal(true)} $isDarkTheme={isDarkTheme}>  + New column </StyledNewColumnBtn>
     </StyledColumnsSection>) : 
         <div className = {`${styles.emptyBoardSection} heading_L`}>

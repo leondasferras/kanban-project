@@ -31,7 +31,10 @@ const EditBoard = () => {
 
   const onColumnRemove = (e:MouseEvent) => {
     const newColumns = [...columns]
-    const columnToRemove = newColumns.findIndex(column => column.id === e.target?.dataset.id)
+    const columnToRemove = newColumns.findIndex((column) => {
+      if (!(e.target instanceof HTMLElement)) return
+      column.id === e.target?.dataset.id
+    })
     newColumns.splice(columnToRemove,1)
     setColumns([...newColumns])
   }

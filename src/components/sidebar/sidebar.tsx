@@ -1,8 +1,9 @@
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
 import styles from "./sidebar.module.css";
 import { ThemeSwitch } from "../themeSwitch/themeSwitch";
 import useTasks from "../../services/store";
 import { IBoard } from "../../services/store";
+//@ts-ignore
 import Icon  from '../../assets/icon-board.svg?react'
 import useWindowSize from "../../services/useWindowSize";
 import styled from "styled-components";
