@@ -1,2 +1,2 @@
-# React + TypeScript + Vite
-##[kanban-project-ivory.vercel.app](kanban-project-ivory.vercel.app)
+# React + TypeScript + Vite + StyledComponents
+## [https://kanban-project-ivory.vercel.app/](https://kanban-project-ivory.vercel.app/)
