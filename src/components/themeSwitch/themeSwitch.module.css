@@ -10,13 +10,11 @@ input[type = checkbox] {
   background: url('../../assets/icon-light-theme.svg') center no-repeat;
   width: 20px;
   height: 20px;
-  cursor: pointer;
 }
 .darkThemeIcon {
   background: url('../../assets/icon-dark-theme.svg') center no-repeat;
   width: 20px;
   height: 20px;
-  cursor: pointer;
 }
 
 .switchContainer {
@@ -30,6 +28,7 @@ input[type = checkbox] {
   align-items: center;
   padding: 3px 3px;
   margin: 0 20px;
+  cursor: pointer;
 }
 
 .switchContainer:hover {

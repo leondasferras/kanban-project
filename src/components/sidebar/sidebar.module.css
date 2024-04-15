@@ -48,6 +48,7 @@ input[type = radio] {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 input[type = radio]:checked + label {
@@ -73,12 +74,14 @@ margin-left: -30px;
 border-top-right-radius: 50px;
 border-bottom-right-radius: 50px;
 box-sizing: border-box;
+cursor: pointer;
 }
 
 .hideIcon {
   width: 18px;
   height: 18px;
   background: url('../../assets/icon-hide-sidebar.svg') no-repeat;
+
 }
 
 .hideSidebarBtn:hover {
@@ -103,6 +106,7 @@ box-sizing: border-box;
   border-bottom-right-radius: 50px;
   box-sizing: border-box;
   text-align: center;
+  cursor: pointer;
 }
 
 .createBtnIcon svg {
@@ -117,6 +121,7 @@ box-sizing: border-box;
   bottom: 30px;
   border-radius: 30px ;
   background:var(--main-purple) url('../../assets/icon-show-sidebar.svg') 70% 50% no-repeat ;
+  cursor: pointer;
 }
 
 .openSidebarBtn:hover {

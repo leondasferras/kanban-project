@@ -10,7 +10,7 @@ border-radius: 4px;
 height: 40px;
 padding: 12px;
 box-sizing: border-box;
-background-color: ${props => props.$isDarkTheme ? 'var(--dark-gray)':'var(--white)'};
+background-color: ${props => props.$isDarkTheme ? 'var(--dark-gray)':'var(--light-grey)'};
 border: none;
 outline: none;
 display: flex;
