@@ -4,6 +4,7 @@ input[type = checkbox] {
   height: 1px;
   overflow: hidden;
   clip-path: inset(0 0 0 0);
+  visibility: hidden;
 }
 
 
@@ -16,6 +17,7 @@ input[type="checkbox"] + span {
   background-color: var(--white);
   border-radius: 2px;
   margin-right: 16px;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:checked + span {
